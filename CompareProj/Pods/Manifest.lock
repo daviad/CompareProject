@@ -1,0 +1,17 @@
+PODS:
+  - IQKeyboardManager (4.0.10)
+  - Realm (2.8.3):
+    - Realm/Headers (= 2.8.3)
+  - Realm/Headers (2.8.3)
+
+DEPENDENCIES:
+  - IQKeyboardManager
+  - Realm
+
+SPEC CHECKSUMS:
+  IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
+  Realm: 3601ef091c8c499a31101d8563b991e75546cdce
+
+PODFILE CHECKSUM: 1205a516791ac339f991879092399ad6baa1d8ed
+
+COCOAPODS: 1.2.0

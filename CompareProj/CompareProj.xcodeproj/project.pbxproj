@@ -1,0 +1,497 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22F2DFE783E76282D5BB65F4 /* Pods_CompareProj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E0CC8E142CB7995D1973A9 /* Pods_CompareProj.framework */; };
+		B9769E5E1F66359C008EC8B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769E5D1F66359C008EC8B3 /* main.m */; };
+		B9769E611F66359C008EC8B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769E601F66359C008EC8B3 /* AppDelegate.m */; };
+		B9769E641F66359C008EC8B3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769E631F66359C008EC8B3 /* ViewController.m */; };
+		B9769E671F66359C008EC8B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9769E651F66359C008EC8B3 /* Main.storyboard */; };
+		B9769E691F66359C008EC8B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9769E681F66359C008EC8B3 /* Assets.xcassets */; };
+		B9769E6C1F66359C008EC8B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9769E6A1F66359C008EC8B3 /* LaunchScreen.storyboard */; };
+		B9769EA71F665510008EC8B3 /* EditProjControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EA61F665510008EC8B3 /* EditProjControllerViewController.m */; };
+		B9769EAA1F6656CE008EC8B3 /* PropertyController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EA91F6656CE008EC8B3 /* PropertyController.m */; };
+		B9769EB81F66600D008EC8B3 /* EditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EB71F66600D008EC8B3 /* EditableCell.m */; };
+		B9769ED01F6665DF008EC8B3 /* ExcelLockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EBB1F6665DF008EC8B3 /* ExcelLockCell.m */; };
+		B9769ED11F6665DF008EC8B3 /* ExcelLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9769EBC1F6665DF008EC8B3 /* ExcelLockCell.xib */; };
+		B9769ED21F6665DF008EC8B3 /* ExcelLockSection.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EBE1F6665DF008EC8B3 /* ExcelLockSection.m */; };
+		B9769ED31F6665DF008EC8B3 /* ExcelLockSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9769EBF1F6665DF008EC8B3 /* ExcelLockSection.xib */; };
+		B9769ED41F6665DF008EC8B3 /* ExcelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EC11F6665DF008EC8B3 /* ExcelSection.m */; };
+		B9769ED51F6665DF008EC8B3 /* ExcelSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9769EC21F6665DF008EC8B3 /* ExcelSection.xib */; };
+		B9769ED61F6665DF008EC8B3 /* ExcelUnLockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EC41F6665DF008EC8B3 /* ExcelUnLockCell.m */; };
+		B9769ED71F6665DF008EC8B3 /* ExcelUnLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9769EC51F6665DF008EC8B3 /* ExcelUnLockCell.xib */; };
+		B9769ED81F6665DF008EC8B3 /* ExcelView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EC71F6665DF008EC8B3 /* ExcelView.m */; };
+		B9769ED91F6665DF008EC8B3 /* LockViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EC91F6665DF008EC8B3 /* LockViewCell.m */; };
+		B9769EDA1F6665DF008EC8B3 /* LockViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9769ECA1F6665DF008EC8B3 /* LockViewCell.xib */; };
+		B9769EDB1F6665DF008EC8B3 /* ScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769ECC1F6665DF008EC8B3 /* ScrollViewCell.m */; };
+		B9769EDC1F6665DF008EC8B3 /* ScrollViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9769ECD1F6665DF008EC8B3 /* ScrollViewCell.xib */; };
+		B9769EDD1F6665DF008EC8B3 /* UILabel+FitWitdhAndHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769ECF1F6665DF008EC8B3 /* UILabel+FitWitdhAndHeight.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		48E0CC8E142CB7995D1973A9 /* Pods_CompareProj.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CompareProj.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		62AC1856907FC9414B3DD20C /* Pods-CompareProj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompareProj.release.xcconfig"; path = "Pods/Target Support Files/Pods-CompareProj/Pods-CompareProj.release.xcconfig"; sourceTree = "<group>"; };
+		7B9E34CC7534A0E0F4179FD1 /* Pods-CompareProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompareProj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CompareProj/Pods-CompareProj.debug.xcconfig"; sourceTree = "<group>"; };
+		B9769E591F66359C008EC8B3 /* CompareProj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompareProj.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9769E5D1F66359C008EC8B3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B9769E5F1F66359C008EC8B3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B9769E601F66359C008EC8B3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B9769E621F66359C008EC8B3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B9769E631F66359C008EC8B3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B9769E661F66359C008EC8B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B9769E681F66359C008EC8B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B9769E6B1F66359C008EC8B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B9769E6D1F66359C008EC8B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9769EA51F665510008EC8B3 /* EditProjControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProjControllerViewController.h; sourceTree = "<group>"; };
+		B9769EA61F665510008EC8B3 /* EditProjControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProjControllerViewController.m; sourceTree = "<group>"; };
+		B9769EA81F6656CE008EC8B3 /* PropertyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyController.h; sourceTree = "<group>"; };
+		B9769EA91F6656CE008EC8B3 /* PropertyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyController.m; sourceTree = "<group>"; };
+		B9769EB61F66600D008EC8B3 /* EditableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableCell.h; sourceTree = "<group>"; };
+		B9769EB71F66600D008EC8B3 /* EditableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableCell.m; sourceTree = "<group>"; };
+		B9769EBA1F6665DF008EC8B3 /* ExcelLockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelLockCell.h; sourceTree = "<group>"; };
+		B9769EBB1F6665DF008EC8B3 /* ExcelLockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelLockCell.m; sourceTree = "<group>"; };
+		B9769EBC1F6665DF008EC8B3 /* ExcelLockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcelLockCell.xib; sourceTree = "<group>"; };
+		B9769EBD1F6665DF008EC8B3 /* ExcelLockSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelLockSection.h; sourceTree = "<group>"; };
+		B9769EBE1F6665DF008EC8B3 /* ExcelLockSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelLockSection.m; sourceTree = "<group>"; };
+		B9769EBF1F6665DF008EC8B3 /* ExcelLockSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcelLockSection.xib; sourceTree = "<group>"; };
+		B9769EC01F6665DF008EC8B3 /* ExcelSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelSection.h; sourceTree = "<group>"; };
+		B9769EC11F6665DF008EC8B3 /* ExcelSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelSection.m; sourceTree = "<group>"; };
+		B9769EC21F6665DF008EC8B3 /* ExcelSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcelSection.xib; sourceTree = "<group>"; };
+		B9769EC31F6665DF008EC8B3 /* ExcelUnLockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelUnLockCell.h; sourceTree = "<group>"; };
+		B9769EC41F6665DF008EC8B3 /* ExcelUnLockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelUnLockCell.m; sourceTree = "<group>"; };
+		B9769EC51F6665DF008EC8B3 /* ExcelUnLockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcelUnLockCell.xib; sourceTree = "<group>"; };
+		B9769EC61F6665DF008EC8B3 /* ExcelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelView.h; sourceTree = "<group>"; };
+		B9769EC71F6665DF008EC8B3 /* ExcelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelView.m; sourceTree = "<group>"; };
+		B9769EC81F6665DF008EC8B3 /* LockViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockViewCell.h; sourceTree = "<group>"; };
+		B9769EC91F6665DF008EC8B3 /* LockViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockViewCell.m; sourceTree = "<group>"; };
+		B9769ECA1F6665DF008EC8B3 /* LockViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LockViewCell.xib; sourceTree = "<group>"; };
+		B9769ECB1F6665DF008EC8B3 /* ScrollViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewCell.h; sourceTree = "<group>"; };
+		B9769ECC1F6665DF008EC8B3 /* ScrollViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewCell.m; sourceTree = "<group>"; };
+		B9769ECD1F6665DF008EC8B3 /* ScrollViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollViewCell.xib; sourceTree = "<group>"; };
+		B9769ECE1F6665DF008EC8B3 /* UILabel+FitWitdhAndHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FitWitdhAndHeight.h"; sourceTree = "<group>"; };
+		B9769ECF1F6665DF008EC8B3 /* UILabel+FitWitdhAndHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FitWitdhAndHeight.m"; sourceTree = "<group>"; };
+		B9769EDE1F666746008EC8B3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B9769E561F66359C008EC8B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22F2DFE783E76282D5BB65F4 /* Pods_CompareProj.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AAF275B7A96E36B2B4EB74FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				48E0CC8E142CB7995D1973A9 /* Pods_CompareProj.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B9769E501F66359C008EC8B3 = {
+			isa = PBXGroup;
+			children = (
+				B9769E5B1F66359C008EC8B3 /* CompareProj */,
+				B9769E5A1F66359C008EC8B3 /* Products */,
+				DA4F642538CAA1185A956B94 /* Pods */,
+				AAF275B7A96E36B2B4EB74FD /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B9769E5A1F66359C008EC8B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B9769E591F66359C008EC8B3 /* CompareProj.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B9769E5B1F66359C008EC8B3 /* CompareProj */ = {
+			isa = PBXGroup;
+			children = (
+				B9769EB91F6665DF008EC8B3 /* ExcelView */,
+				B9769EA51F665510008EC8B3 /* EditProjControllerViewController.h */,
+				B9769EA61F665510008EC8B3 /* EditProjControllerViewController.m */,
+				B9769E5F1F66359C008EC8B3 /* AppDelegate.h */,
+				B9769E601F66359C008EC8B3 /* AppDelegate.m */,
+				B9769E621F66359C008EC8B3 /* ViewController.h */,
+				B9769E631F66359C008EC8B3 /* ViewController.m */,
+				B9769E651F66359C008EC8B3 /* Main.storyboard */,
+				B9769E681F66359C008EC8B3 /* Assets.xcassets */,
+				B9769E6A1F66359C008EC8B3 /* LaunchScreen.storyboard */,
+				B9769E6D1F66359C008EC8B3 /* Info.plist */,
+				B9769E5C1F66359C008EC8B3 /* Supporting Files */,
+				B9769EA81F6656CE008EC8B3 /* PropertyController.h */,
+				B9769EA91F6656CE008EC8B3 /* PropertyController.m */,
+				B9769EB61F66600D008EC8B3 /* EditableCell.h */,
+				B9769EB71F66600D008EC8B3 /* EditableCell.m */,
+			);
+			path = CompareProj;
+			sourceTree = "<group>";
+		};
+		B9769E5C1F66359C008EC8B3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B9769E5D1F66359C008EC8B3 /* main.m */,
+				B9769EDE1F666746008EC8B3 /* PrefixHeader.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B9769EB91F6665DF008EC8B3 /* ExcelView */ = {
+			isa = PBXGroup;
+			children = (
+				B9769EBA1F6665DF008EC8B3 /* ExcelLockCell.h */,
+				B9769EBB1F6665DF008EC8B3 /* ExcelLockCell.m */,
+				B9769EBC1F6665DF008EC8B3 /* ExcelLockCell.xib */,
+				B9769EBD1F6665DF008EC8B3 /* ExcelLockSection.h */,
+				B9769EBE1F6665DF008EC8B3 /* ExcelLockSection.m */,
+				B9769EBF1F6665DF008EC8B3 /* ExcelLockSection.xib */,
+				B9769EC01F6665DF008EC8B3 /* ExcelSection.h */,
+				B9769EC11F6665DF008EC8B3 /* ExcelSection.m */,
+				B9769EC21F6665DF008EC8B3 /* ExcelSection.xib */,
+				B9769EC31F6665DF008EC8B3 /* ExcelUnLockCell.h */,
+				B9769EC41F6665DF008EC8B3 /* ExcelUnLockCell.m */,
+				B9769EC51F6665DF008EC8B3 /* ExcelUnLockCell.xib */,
+				B9769EC61F6665DF008EC8B3 /* ExcelView.h */,
+				B9769EC71F6665DF008EC8B3 /* ExcelView.m */,
+				B9769EC81F6665DF008EC8B3 /* LockViewCell.h */,
+				B9769EC91F6665DF008EC8B3 /* LockViewCell.m */,
+				B9769ECA1F6665DF008EC8B3 /* LockViewCell.xib */,
+				B9769ECB1F6665DF008EC8B3 /* ScrollViewCell.h */,
+				B9769ECC1F6665DF008EC8B3 /* ScrollViewCell.m */,
+				B9769ECD1F6665DF008EC8B3 /* ScrollViewCell.xib */,
+				B9769ECE1F6665DF008EC8B3 /* UILabel+FitWitdhAndHeight.h */,
+				B9769ECF1F6665DF008EC8B3 /* UILabel+FitWitdhAndHeight.m */,
+			);
+			path = ExcelView;
+			sourceTree = "<group>";
+		};
+		DA4F642538CAA1185A956B94 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7B9E34CC7534A0E0F4179FD1 /* Pods-CompareProj.debug.xcconfig */,
+				62AC1856907FC9414B3DD20C /* Pods-CompareProj.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B9769E581F66359C008EC8B3 /* CompareProj */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9769E701F66359C008EC8B3 /* Build configuration list for PBXNativeTarget "CompareProj" */;
+			buildPhases = (
+				B180387AB019B9E48956501B /* [CP] Check Pods Manifest.lock */,
+				B9769E551F66359C008EC8B3 /* Sources */,
+				B9769E561F66359C008EC8B3 /* Frameworks */,
+				B9769E571F66359C008EC8B3 /* Resources */,
+				D30D327B1B10EB43DDFCF5DC /* [CP] Embed Pods Frameworks */,
+				BB454ECE2EC67CB3E51F5EF3 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CompareProj;
+			productName = CompareProj;
+			productReference = B9769E591F66359C008EC8B3 /* CompareProj.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B9769E511F66359C008EC8B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = " dingxiuwei";
+				TargetAttributes = {
+					B9769E581F66359C008EC8B3 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 6D7J43H33A;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = B9769E541F66359C008EC8B3 /* Build configuration list for PBXProject "CompareProj" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B9769E501F66359C008EC8B3;
+			productRefGroup = B9769E5A1F66359C008EC8B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B9769E581F66359C008EC8B3 /* CompareProj */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B9769E571F66359C008EC8B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9769ED11F6665DF008EC8B3 /* ExcelLockCell.xib in Resources */,
+				B9769ED71F6665DF008EC8B3 /* ExcelUnLockCell.xib in Resources */,
+				B9769E6C1F66359C008EC8B3 /* LaunchScreen.storyboard in Resources */,
+				B9769ED31F6665DF008EC8B3 /* ExcelLockSection.xib in Resources */,
+				B9769E691F66359C008EC8B3 /* Assets.xcassets in Resources */,
+				B9769EDA1F6665DF008EC8B3 /* LockViewCell.xib in Resources */,
+				B9769E671F66359C008EC8B3 /* Main.storyboard in Resources */,
+				B9769EDC1F6665DF008EC8B3 /* ScrollViewCell.xib in Resources */,
+				B9769ED51F6665DF008EC8B3 /* ExcelSection.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B180387AB019B9E48956501B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BB454ECE2EC67CB3E51F5EF3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CompareProj/Pods-CompareProj-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D30D327B1B10EB43DDFCF5DC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CompareProj/Pods-CompareProj-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B9769E551F66359C008EC8B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9769E641F66359C008EC8B3 /* ViewController.m in Sources */,
+				B9769ED91F6665DF008EC8B3 /* LockViewCell.m in Sources */,
+				B9769EA71F665510008EC8B3 /* EditProjControllerViewController.m in Sources */,
+				B9769ED41F6665DF008EC8B3 /* ExcelSection.m in Sources */,
+				B9769E611F66359C008EC8B3 /* AppDelegate.m in Sources */,
+				B9769ED81F6665DF008EC8B3 /* ExcelView.m in Sources */,
+				B9769EB81F66600D008EC8B3 /* EditableCell.m in Sources */,
+				B9769ED61F6665DF008EC8B3 /* ExcelUnLockCell.m in Sources */,
+				B9769ED21F6665DF008EC8B3 /* ExcelLockSection.m in Sources */,
+				B9769E5E1F66359C008EC8B3 /* main.m in Sources */,
+				B9769EDD1F6665DF008EC8B3 /* UILabel+FitWitdhAndHeight.m in Sources */,
+				B9769EAA1F6656CE008EC8B3 /* PropertyController.m in Sources */,
+				B9769ED01F6665DF008EC8B3 /* ExcelLockCell.m in Sources */,
+				B9769EDB1F6665DF008EC8B3 /* ScrollViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B9769E651F66359C008EC8B3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B9769E661F66359C008EC8B3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B9769E6A1F66359C008EC8B3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B9769E6B1F66359C008EC8B3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B9769E6E1F66359C008EC8B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B9769E6F1F66359C008EC8B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B9769E711F66359C008EC8B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B9E34CC7534A0E0F4179FD1 /* Pods-CompareProj.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6D7J43H33A;
+				INFOPLIST_FILE = CompareProj/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dxw.CompareProj;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B9769E721F66359C008EC8B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62AC1856907FC9414B3DD20C /* Pods-CompareProj.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6D7J43H33A;
+				INFOPLIST_FILE = CompareProj/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dxw.CompareProj;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B9769E541F66359C008EC8B3 /* Build configuration list for PBXProject "CompareProj" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9769E6E1F66359C008EC8B3 /* Debug */,
+				B9769E6F1F66359C008EC8B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B9769E701F66359C008EC8B3 /* Build configuration list for PBXNativeTarget "CompareProj" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9769E711F66359C008EC8B3 /* Debug */,
+				B9769E721F66359C008EC8B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B9769E511F66359C008EC8B3 /* Project object */;
+}
