@@ -10,6 +10,11 @@
 #import "EditProjControllerViewController.h"
 #import "ExcelView.h"
 
+#import <Realm/Realm.h>
+#import "Project.h"
+#import "RLMRealm+AGDynamic.h"
+
+
 @interface ViewController ()
 @property(nonatomic,retain) NSMutableArray *leftTableDataArray;//表格第一列数据
 @property(nonatomic,retain) NSMutableArray *excelDataArray;//表格数据
@@ -80,8 +85,54 @@
     //        NSLog(@"偏移量：%f",contentOffset.x);
     //    }];
     
+    RLMRealm *realm = [RLMRealm defaultRealm];
+
+    RLMResults *proResults = [Project allObjects];
+    if (proResults.count > 0) {
+        Project *p = proResults[0];
+        NSLog(@"p.name = %@",p.name);
+        
+        Project *pt = [[Project alloc] initWithValue:@[@"1",@"pro1",@"p1",@"p2"]];
+        [[RLMRealm defaultRealm] transactionWithBlock:^{
+            [[RLMRealm defaultRealm] addObject:pt];
+        }];
+    }
+    else
+    {
+        Project *pro = [[Project alloc] init];
+        pro.id = @"1";
+        pro.name = @"pro1";
+        [realm transactionWithBlock:^{
+            [realm addObject:pro];
+        }];
+    }
 
 
+}
+
+
+// also see realm dynamic tests
+// https://github.com/realm/realm-cocoa/blob/123f97cdb2819397e289e088558f36e365e712a7/Realm/Tests/DynamicTests.m
+- (void)testDynamic {
+//    [RLMRealm setSchemaVersion:1 forRealmAtPath:RLMTestRealmPath() withMigrationBlock:^(RLMMigration *migration, NSUInteger oldSchemaVersion) {
+//    }];
+//
+//    RLMProperty *propA = [[RLMProperty alloc] initWithName:@"uuid" type:RLMPropertyTypeString objectClassName:nil indexed:YES];
+//    RLMProperty *propB = [[RLMProperty alloc] initWithName:@"title" type:RLMPropertyTypeString objectClassName:nil indexed:NO];
+//    RLMObjectSchema *objectSchema = [[RLMObjectSchema alloc] initWithClassName:@"TrulyDynamicObject" objectClass:RLMObject.class properties:@[propA, propB]];
+//    RLMSchema *schema = [[RLMSchema alloc] init]; // it would be great to have RLMSchema method like +schemaWithClassName:objectClass:properties
+//    schema.objectSchema = @[objectSchema];
+//
+//    RLMRealm *dyrealm = [RLMRealm realmWithPath:RLMTestRealmPath() key:nil readOnly:NO inMemory:NO dynamic:YES schema:schema error:nil];
+//
+//    [dyrealm beginWriteTransaction];
+//    [dyrealm createObject:@"TrulyDynamicObject" withValue:@{@"uuid": [[NSUUID UUID] UUIDString], @"title": @"item title"}];
+//    [dyrealm commitWriteTransaction];
+//
+//    RLMResults *results = [dyrealm allObjects:@"TrulyDynamicObject"];
+//    for (id obj in results) {
+//        NSLog(@"%@ %@", obj[@"uuid"], obj[@"title"]);
+//    }
 }
 
 - (void)createProj
