@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <Realm/Realm.h>
+#import "Property.h"
 
 @interface Project :  RLMObject
-@property(nonatomic,copy)NSString *id;
 @property(nonatomic,copy)NSString *name;
-@property(nonatomic,copy)NSString *propertyJsonStr;
-@property(nonatomic,strong)NSMutableArray *properties;
+@property(nonatomic,assign)NSInteger order;
+@property(nonatomic,strong)NSMutableArray<NSString*> *properties;
+@property RLMArray<Property *><Property> *rlmProperties;
 @end

@@ -8,13 +8,15 @@
 
 #import "EditController.h"
 #import "EditableCell.h"
+#import "GlobalUIControl.h"
 
 @interface EditController ()<UITableViewDelegate,UITableViewDataSource,EditableCellDelegate>
 {
     UITableView *_tableView;
-    NSMutableArray *_dataArr;
     BOOL _isEditting;
 }
+@property(nonatomic,strong)NSMutableArray *dataArr;
+
 @end
 
 @implementation EditController
@@ -30,9 +32,8 @@
 #define  ReuseCell   @"ReuseCell"
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"edit";
+    [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView)];
     _isEditting = NO;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView)];
     // Do any additional setup after loading the view.
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
@@ -41,12 +42,15 @@
     [_tableView registerClass:[EditableCell class] forCellReuseIdentifier:ReuseCell];
     UIButton *addBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 44)];
     [addBtn setTitle:@"add ...." forState:UIControlStateNormal];
-    [addBtn addTarget:self action:@selector(addProj) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
     //    [addBtn setTintColor:[UIColor redColor]];
     [addBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     _tableView.tableFooterView = addBtn;
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -101,7 +105,8 @@
 // Data manipulation - reorder / moving support
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    
+    [_dataArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    [self.delegate editController:self moveRowAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
 
 
@@ -148,7 +153,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.delegate jumpToDetailController];
+    [self.delegate jumpToDetailControllerWithIndex:indexPath.row];
 }
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -168,19 +173,26 @@
 }
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"关注" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        NSLog(@"点击了关注");
-        
-        // 收回左滑出现的按钮(退出编辑模式)
-        tableView.editing = NO;
-    }];
+    __weak EditController *weakSelf = self;
+    NSMutableArray *resultArr = [NSMutableArray array];
+    if ([self.delegate needEidtDetail]) {
+        UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"eidt" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+            NSLog(@"");
+            [weakSelf.delegate clickEditDetail];
+            tableView.editing = NO;
+        }];
+        [resultArr addObject:action0];
+    }
+
     UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        //        [self.wineArray removeObjectAtIndex:indexPath.row];
-        //        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [weakSelf.delegate deleteRowsAtIndexPath:indexPath];
+        [weakSelf.dataArr removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         tableView.editing = NO;
     }];
+    [resultArr addObject:action1];
     
-    return @[action1, action0];
+    return resultArr;
     
 }
 
@@ -210,7 +222,7 @@
 
 
 #pragma mark-- evnet
-- (void)addProj
+- (void)addItem
 {
     [_dataArr addObject:@""];
     //    [_tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_projs.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
@@ -224,23 +236,39 @@
     
     if (_isEditting)
     {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView)];
+        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView)];
     }
     else
     {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView)];
+        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView)];
     }
     [_tableView setEditing:_isEditting animated:YES];
     [_tableView reloadData];
-    
 }
+
 
 #pragma mark-  EditableCellDelegate <NSObject>
 - (void)textEditDone:(EditableCell*)cell text:(NSString*)text
 {
     if (text.length > 0) {
         NSIndexPath *index = [_tableView indexPathForCell:cell];
-        [_dataArr replaceObjectAtIndex:index.row withObject:text];
+        BOOL isexist = NO;
+        for (NSString *oldStr in _dataArr) {
+            if ([oldStr isEqualToString:text])
+            {
+                isexist = YES;
+            }
+        }
+        
+        if (!isexist)
+        {
+            [_dataArr replaceObjectAtIndex:index.row withObject:text];
+            [self.delegate addItem:text atIndex:index.row];
+        }
+        else
+        {
+            NSLog(@"please new item");
+        }
     }
 }
 

@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class EditController;
 @protocol EditControllerDelegate <NSObject>
-
-- (void)jumpToDetailController;
-
+- (void)jumpToDetailControllerWithIndex:(NSInteger)index;
+- (void)clickEditDetail;
+- (void)deleteRowsAtIndexPath:(NSIndexPath*)indexPath;
+- (void)addItem:(NSString*)text atIndex:(NSInteger)index;
+- (BOOL)needEidtDetail;
+- (void)editController:(EditController *)ctr moveRowAtIndex:(NSInteger)sourceIndex toIndex:(NSInteger)destinationIndex;
 @end
 
 @interface EditController : UIViewController

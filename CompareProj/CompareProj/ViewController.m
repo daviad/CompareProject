@@ -28,15 +28,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"创建项目" style:UIBarButtonItemStylePlain target:self action:@selector(createProj)];
+    EditProjControllerViewController *childCtr = [[EditProjControllerViewController alloc] init];
+//    [self addChildViewController:childCtr];
+//    [self.view addSubview:childCtr.view];
+    [self.navigationController pushViewController:childCtr animated:NO];
     
-    
-    self.leftTableDataArray=(NSMutableArray *)@[@"塔城",@"哈密",@"和田",@"阿勒泰",@"克州"];
-    self.rightTableHeadArray=(NSMutableArray *)@[@"当日收入（万）",@"同比",@"环比",@"当月收入（万）",@"同比",@"环比",@"当年收入（万）",@"同比",@"环比"];
-    self.excelDataArray=(NSMutableArray *)@[@[@"2.91111111111111111",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%11111111111111111111",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"]];
-    
-    
-    self.allTableDataArray=(NSMutableArray *)@[@[@"地区",@"当日收入（万）",@"同比",@"环比",@"当月收入（万）",@"同比",@"环比",@"当年收入（万）",@"同比",@"环比"],@[@"塔城",@"2.91111111111111111111111111111111111111111111111111111111",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"哈密",@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"和田",@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"阿勒泰",@"2.9",@"2%",@"3%",@"3.0",@"4%11111111111111111111",@"5%",@"18",@"4.5%",@"6.8%"],@[@"克州",@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"]];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"创建项目" style:UIBarButtonItemStylePlain target:self action:@selector(createProj)];
+//    
+//    
+//    self.leftTableDataArray=(NSMutableArray *)@[@"塔城",@"哈密",@"和田",@"阿勒泰",@"克州"];
+//    self.rightTableHeadArray=(NSMutableArray *)@[@"当日收入（万）",@"同比",@"环比",@"当月收入（万）",@"同比",@"环比",@"当年收入（万）",@"同比",@"环比"];
+//    self.excelDataArray=(NSMutableArray *)@[@[@"2.91111111111111111",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%11111111111111111111",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"]];
+//    
+//    
+//    self.allTableDataArray=(NSMutableArray *)@[@[@"地区",@"当日收入（万）",@"同比",@"环比",@"当月收入（万）",@"同比",@"环比",@"当年收入（万）",@"同比",@"环比"],@[@"塔城",@"2.91111111111111111111111111111111111111111111111111111111",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"哈密",@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"和田",@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"阿勒泰",@"2.9",@"2%",@"3%",@"3.0",@"4%11111111111111111111",@"5%",@"18",@"4.5%",@"6.8%"],@[@"克州",@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"]];
     
     //    self.allTableDataArray=[NSMutableArray arrayWithCapacity:10];
     //    NSMutableArray *fristDatas=[NSMutableArray arrayWithCapacity:10];
@@ -57,17 +62,17 @@
     //    NSLog(@"%@",self.allTableDataArray);
     
     //代码方式添加
-    ExcelView *excelView=[[ExcelView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-    excelView.topTableHeadDatas=self.rightTableHeadArray;
-    excelView.leftTabHeadDatas=self.leftTableDataArray;
-    excelView.tableDatas=self.excelDataArray;
-    excelView.isLockFristColumn=YES;
-    excelView.isLockFristRow=YES;
-    excelView.isColumnTitlte=YES;
-    excelView.columnTitlte=@"地区";
-    [excelView show];
-    [self.view addSubview:excelView];
-    
+//    ExcelView *excelView=[[ExcelView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+//    excelView.topTableHeadDatas=self.rightTableHeadArray;
+//    excelView.leftTabHeadDatas=self.leftTableDataArray;
+//    excelView.tableDatas=self.excelDataArray;
+//    excelView.isLockFristColumn=YES;
+//    excelView.isLockFristRow=YES;
+//    excelView.isColumnTitlte=YES;
+//    excelView.columnTitlte=@"地区";
+//    [excelView show];
+//    [self.view addSubview:excelView];
+//    
     
     ////    xib布局添加方式
     //    self.mExcelView.allTableDatas=self.allTableDataArray;
@@ -85,27 +90,27 @@
     //        NSLog(@"偏移量：%f",contentOffset.x);
     //    }];
     
-    RLMRealm *realm = [RLMRealm defaultRealm];
-
-    RLMResults *proResults = [Project allObjects];
-    if (proResults.count > 0) {
-        Project *p = proResults[0];
-        NSLog(@"p.name = %@",p.name);
-        
-        Project *pt = [[Project alloc] initWithValue:@[@"1",@"pro1",@"p1",@"p2"]];
-        [[RLMRealm defaultRealm] transactionWithBlock:^{
-            [[RLMRealm defaultRealm] addObject:pt];
-        }];
-    }
-    else
-    {
-        Project *pro = [[Project alloc] init];
-        pro.id = @"1";
-        pro.name = @"pro1";
-        [realm transactionWithBlock:^{
-            [realm addObject:pro];
-        }];
-    }
+//    RLMRealm *realm = [RLMRealm defaultRealm];
+//
+//    RLMResults *proResults = [Project allObjects];
+//    if (proResults.count > 0) {
+//        Project *p = proResults[0];
+//        NSLog(@"p.name = %@",p.name);
+//        
+//        Project *pt = [[Project alloc] initWithValue:@[@"1",@"pro1",@"p1",@"p2"]];
+//        [[RLMRealm defaultRealm] transactionWithBlock:^{
+//            [[RLMRealm defaultRealm] addObject:pt];
+//        }];
+//    }
+//    else
+//    {
+//        Project *pro = [[Project alloc] init];
+//        pro.id = @"1";
+//        pro.name = @"pro1";
+//        [realm transactionWithBlock:^{
+//            [realm addObject:pro];
+//        }];
+//    }
 
 
 }
@@ -135,10 +140,10 @@
 //    }
 }
 
-- (void)createProj
-{
-    [self.navigationController pushViewController:[EditProjControllerViewController new] animated:YES];
-}
+//- (void)createProj
+//{
+//    [self.navigationController pushViewController:[EditProjControllerViewController new] animated:YES];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

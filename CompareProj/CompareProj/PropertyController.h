@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Project.h"
 @interface PropertyController : UIViewController
-
+- (instancetype)initWithPoject:(Project*)p;
 @end

@@ -12,4 +12,17 @@
 + (NSArray *)ignoredProperties {
     return @[@"properties"];
 }
+
++ (NSString *)primaryKey {
+    return @"name";
+}
+
+- (NSMutableArray*)properties
+{
+    NSMutableArray *tempArr = [[NSMutableArray alloc] initWithCapacity:self.rlmProperties.count];
+    for (Property *p in self.rlmProperties) {
+        [tempArr addObject:p.name];
+    }
+    return tempArr;
+}
 @end

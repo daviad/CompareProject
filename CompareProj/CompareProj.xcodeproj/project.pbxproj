@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		22F2DFE783E76282D5BB65F4 /* Pods_CompareProj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E0CC8E142CB7995D1973A9 /* Pods_CompareProj.framework */; };
+		B96902AC1F68CF1100943379 /* GlobalUIControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B96902AB1F68CF1100943379 /* GlobalUIControl.m */; };
+		B96903371F6919B100943379 /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = B96903361F6919B100943379 /* Property.m */; };
 		B96F6B051F676E8B00878522 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = B96F6B041F676E8B00878522 /* Project.m */; };
 		B96F6B4B1F67D1E500878522 /* RLMRealm+AGDynamic.m in Sources */ = {isa = PBXBuildFile; fileRef = B96F6B4A1F67D1E500878522 /* RLMRealm+AGDynamic.m */; };
 		B96F6B4E1F67E1A400878522 /* EditController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96F6B4D1F67E1A400878522 /* EditController.m */; };
@@ -40,6 +42,10 @@
 		48E0CC8E142CB7995D1973A9 /* Pods_CompareProj.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CompareProj.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AC1856907FC9414B3DD20C /* Pods-CompareProj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompareProj.release.xcconfig"; path = "Pods/Target Support Files/Pods-CompareProj/Pods-CompareProj.release.xcconfig"; sourceTree = "<group>"; };
 		7B9E34CC7534A0E0F4179FD1 /* Pods-CompareProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompareProj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CompareProj/Pods-CompareProj.debug.xcconfig"; sourceTree = "<group>"; };
+		B96902AA1F68CF1100943379 /* GlobalUIControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalUIControl.h; sourceTree = "<group>"; };
+		B96902AB1F68CF1100943379 /* GlobalUIControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalUIControl.m; sourceTree = "<group>"; };
+		B96903351F6919B100943379 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Property.h; sourceTree = "<group>"; };
+		B96903361F6919B100943379 /* Property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Property.m; sourceTree = "<group>"; };
 		B96F6B031F676E8B00878522 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		B96F6B041F676E8B00878522 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		B96F6B491F67D1E500878522 /* RLMRealm+AGDynamic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RLMRealm+AGDynamic.h"; sourceTree = "<group>"; };
@@ -150,6 +156,10 @@
 				B96F6B4A1F67D1E500878522 /* RLMRealm+AGDynamic.m */,
 				B96F6B4C1F67E1A400878522 /* EditController.h */,
 				B96F6B4D1F67E1A400878522 /* EditController.m */,
+				B96902AA1F68CF1100943379 /* GlobalUIControl.h */,
+				B96902AB1F68CF1100943379 /* GlobalUIControl.m */,
+				B96903351F6919B100943379 /* Property.h */,
+				B96903361F6919B100943379 /* Property.m */,
 			);
 			path = CompareProj;
 			sourceTree = "<group>";
@@ -333,6 +343,7 @@
 				B9769E641F66359C008EC8B3 /* ViewController.m in Sources */,
 				B9769ED91F6665DF008EC8B3 /* LockViewCell.m in Sources */,
 				B9769EA71F665510008EC8B3 /* EditProjControllerViewController.m in Sources */,
+				B96903371F6919B100943379 /* Property.m in Sources */,
 				B96F6B051F676E8B00878522 /* Project.m in Sources */,
 				B9769ED41F6665DF008EC8B3 /* ExcelSection.m in Sources */,
 				B9769E611F66359C008EC8B3 /* AppDelegate.m in Sources */,
@@ -344,6 +355,7 @@
 				B9769EDD1F6665DF008EC8B3 /* UILabel+FitWitdhAndHeight.m in Sources */,
 				B96F6B4E1F67E1A400878522 /* EditController.m in Sources */,
 				B9769EAA1F6656CE008EC8B3 /* PropertyController.m in Sources */,
+				B96902AC1F68CF1100943379 /* GlobalUIControl.m in Sources */,
 				B96F6B4B1F67D1E500878522 /* RLMRealm+AGDynamic.m in Sources */,
 				B9769ED01F6665DF008EC8B3 /* ExcelLockCell.m in Sources */,
 				B9769EDB1F6665DF008EC8B3 /* ScrollViewCell.m in Sources */,

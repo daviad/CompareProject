@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "EditProjControllerViewController.h"
+#import "GlobalUIControl.h"
+
 @interface AppDelegate ()
 
 @end
@@ -19,7 +22,10 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[ViewController new]];
+    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[EditProjControllerViewController new]];
+    [GlobalUIControl sharedInstance].navigationController = navi;
+
+    self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -7,33 +7,67 @@
 //
 
 #import "PropertyController.h"
-
-@interface PropertyController ()
-
+#import "EditController.h"
+#import <Realm/Realm.h>
+@interface PropertyController ()<EditControllerDelegate>
+{
+    
+}
+@property(nonatomic,strong)Project *project;
 @end
 
 @implementation PropertyController
 
+- (instancetype)initWithPoject:(Project*)p
+{
+    if (self = [super init]) {
+        _project = p;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [super viewDidLoad];
     self.title = @"Property";
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    EditController *childCtr = [[EditController alloc] initWithDataArr:_project.properties];
+    [self addChildViewController:childCtr];
+    childCtr.delegate = self;
+    [self.view addSubview:childCtr.view];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+}
+#pragma mark- EditControllerDelegate
+- (void)jumpToDetailControllerWithIndex:(NSInteger)index
+{
+}
+- (BOOL)needEidtDetail
+{
+    return NO;
+}
+- (void)clickEditDetail
+{
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)deleteRowsAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
-*/
-
+- (void)addItem:(NSString *)text atIndex:(NSInteger)index
+{
+    Property *property = [[Property alloc] init];
+    property.uuid = [[NSUUID UUID] UUIDString];
+    property.name = text;
+    __weak Project *weakProj = _project;
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        [weakProj.rlmProperties addObject:property];
+    }];
+}
 @end
