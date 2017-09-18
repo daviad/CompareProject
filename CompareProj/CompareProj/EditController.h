@@ -11,11 +11,12 @@
 @class EditController;
 @protocol EditControllerDelegate <NSObject>
 - (void)jumpToDetailControllerWithIndex:(NSInteger)index;
-- (void)clickEditDetail;
+- (void)clickEditDetailAtIndexPath:(NSIndexPath*)indexPath;
 - (void)deleteRowsAtIndexPath:(NSIndexPath*)indexPath;
-- (void)addItem:(NSString*)text atIndex:(NSInteger)index;
+- (void)editItem:(NSString*)text atIndex:(NSInteger)index;
 - (BOOL)needEidtDetail;
 - (void)editController:(EditController *)ctr moveRowAtIndex:(NSInteger)sourceIndex toIndex:(NSInteger)destinationIndex;
+- (void)compare;
 @end
 
 @interface EditController : UIViewController

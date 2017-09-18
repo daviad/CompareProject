@@ -15,4 +15,6 @@ RLM_ARRAY_TYPE(Property);
 @property(nonatomic,copy)NSString *value;
 //@property(nonatomic,strong)Project *project;
 @property(nonatomic,assign)NSInteger order;
+
+- (Property*)customCopy;
 @end

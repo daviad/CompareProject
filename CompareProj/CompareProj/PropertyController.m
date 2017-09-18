@@ -13,18 +13,26 @@
 {
     
 }
-@property(nonatomic,strong)Project *project;
+@property(nonatomic,strong)ProjectClassify *classify;
 @end
 
 @implementation PropertyController
 
 - (instancetype)initWithPoject:(Project*)p
 {
+//    if (self = [super init]) {
+//        _project = p;
+//    }
+    return self;
+}
+- (instancetype)initWithPojectClassify:(ProjectClassify*)pc;
+{
     if (self = [super init]) {
-        _project = p;
+        _classify = pc;
     }
     return self;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -32,7 +40,7 @@
     self.title = @"Property";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    EditController *childCtr = [[EditController alloc] initWithDataArr:_project.properties];
+    EditController *childCtr = [[EditController alloc] initWithDataArr:_classify.properties];
     [self addChildViewController:childCtr];
     childCtr.delegate = self;
     [self.view addSubview:childCtr.view];
@@ -51,7 +59,7 @@
 {
     return NO;
 }
-- (void)clickEditDetail
+- (void)clickEditDetailAtIndexPath:(NSIndexPath*)indexPath;
 {
     
 }
@@ -60,14 +68,33 @@
 {
     
 }
-- (void)addItem:(NSString *)text atIndex:(NSInteger)index
+- (void)editItem:(NSString *)text atIndex:(NSInteger)index
 {
-    Property *property = [[Property alloc] init];
-    property.uuid = [[NSUUID UUID] UUIDString];
-    property.name = text;
-    __weak Project *weakProj = _project;
-    [[RLMRealm defaultRealm] transactionWithBlock:^{
-        [weakProj.rlmProperties addObject:property];
-    }];
+    Property *property = nil;
+    if (_classify.rlmProperties.count == index) {
+        property = [[Property alloc] init];
+        property.uuid = [[NSUUID UUID] UUIDString];
+        property.name = text;
+        __weak ProjectClassify *weakProj = _classify;
+        [[RLMRealm defaultRealm] transactionWithBlock:^{
+          [weakProj.rlmProperties addObject:property];
+        }];
+    }
+    else
+    {
+        property = [_classify.rlmProperties objectAtIndex:index];
+        [[RLMRealm defaultRealm] transactionWithBlock:^{
+            [[RLMRealm defaultRealm] addOrUpdateObject:property];
+        }];
+    }
+}
+- (void)editController:(EditController *)ctr moveRowAtIndex:(NSInteger)sourceIndex toIndex:(NSInteger)destinationIndex
+{
+    
+}
+
+- (void)compare
+{
+    
 }
 @end

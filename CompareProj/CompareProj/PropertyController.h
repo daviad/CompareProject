@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Project.h"
+#import "ProjectClassify.h"
 @interface PropertyController : UIViewController
 - (instancetype)initWithPoject:(Project*)p;
+- (instancetype)initWithPojectClassify:(ProjectClassify*)pc;
 @end

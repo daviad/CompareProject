@@ -9,5 +9,21 @@
 #import "Property.h"
 
 @implementation Property
++ (NSString*)primaryKey
+{
+    return @"uuid";
+}
 
++ (NSDictionary*)defaultPropertyValues
+{
+    return @{@"uuid":[[NSUUID UUID] UUIDString]};
+}
+
+- (Property*)customCopy
+{
+    Property *proNew = [[Property alloc] init];
+    proNew.name = self.name;
+    proNew.order = self.order;
+    return proNew;
+}
 @end

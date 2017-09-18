@@ -1,0 +1,6 @@
+framework module SSCheckBoxView {
+  umbrella header "SSCheckBoxView-umbrella.h"
+
+  export *
+  module * { export * }
+}

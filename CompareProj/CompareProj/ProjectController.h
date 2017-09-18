@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProjectClassify.h"
 
-@interface EditProjControllerViewController : UIViewController
-
+@interface ProjectController : UIViewController
+-(instancetype)initWithClassify:(ProjectClassify*)pc;
 @end

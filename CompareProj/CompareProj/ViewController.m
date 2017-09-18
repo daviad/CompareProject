@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "EditProjControllerViewController.h"
+#import "ProjectController.h"
 #import "ExcelView.h"
 
 #import <Realm/Realm.h>
@@ -16,10 +16,7 @@
 
 
 @interface ViewController ()
-@property(nonatomic,retain) NSMutableArray *leftTableDataArray;//表格第一列数据
-@property(nonatomic,retain) NSMutableArray *excelDataArray;//表格数据
-@property(nonatomic,retain) NSMutableArray *rightTableHeadArray;//表格第一行表头数据
-@property(nonatomic,retain) NSMutableArray *allTableDataArray;//表格所有数据
+
 @end
 
 @implementation ViewController
@@ -28,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor whiteColor];
-    EditProjControllerViewController *childCtr = [[EditProjControllerViewController alloc] init];
+    ProjectController *childCtr = [[ProjectController alloc] init];
 //    [self addChildViewController:childCtr];
 //    [self.view addSubview:childCtr.view];
     [self.navigationController pushViewController:childCtr animated:NO];

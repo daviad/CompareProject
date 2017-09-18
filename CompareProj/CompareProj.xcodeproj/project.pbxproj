@@ -8,8 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		22F2DFE783E76282D5BB65F4 /* Pods_CompareProj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E0CC8E142CB7995D1973A9 /* Pods_CompareProj.framework */; };
+		B95F4B621F6A2F3400F1C52D /* ProjectClassify.m in Sources */ = {isa = PBXBuildFile; fileRef = B95F4B611F6A2F3400F1C52D /* ProjectClassify.m */; };
+		B95F4B651F6A300900F1C52D /* ClassifyController.m in Sources */ = {isa = PBXBuildFile; fileRef = B95F4B641F6A300900F1C52D /* ClassifyController.m */; };
+		B95F4BC31F6A563400F1C52D /* CompareController.m in Sources */ = {isa = PBXBuildFile; fileRef = B95F4BC21F6A563400F1C52D /* CompareController.m */; };
 		B96902AC1F68CF1100943379 /* GlobalUIControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B96902AB1F68CF1100943379 /* GlobalUIControl.m */; };
 		B96903371F6919B100943379 /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = B96903361F6919B100943379 /* Property.m */; };
+		B96A64621F6A11D700FEF4C2 /* ProjectDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96A64611F6A11D700FEF4C2 /* ProjectDetailController.m */; };
+		B96A64651F6A15E900FEF4C2 /* ProjectDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B96A64641F6A15E900FEF4C2 /* ProjectDetailCell.m */; };
 		B96F6B051F676E8B00878522 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = B96F6B041F676E8B00878522 /* Project.m */; };
 		B96F6B4B1F67D1E500878522 /* RLMRealm+AGDynamic.m in Sources */ = {isa = PBXBuildFile; fileRef = B96F6B4A1F67D1E500878522 /* RLMRealm+AGDynamic.m */; };
 		B96F6B4E1F67E1A400878522 /* EditController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96F6B4D1F67E1A400878522 /* EditController.m */; };
@@ -19,7 +24,7 @@
 		B9769E671F66359C008EC8B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9769E651F66359C008EC8B3 /* Main.storyboard */; };
 		B9769E691F66359C008EC8B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9769E681F66359C008EC8B3 /* Assets.xcassets */; };
 		B9769E6C1F66359C008EC8B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9769E6A1F66359C008EC8B3 /* LaunchScreen.storyboard */; };
-		B9769EA71F665510008EC8B3 /* EditProjControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EA61F665510008EC8B3 /* EditProjControllerViewController.m */; };
+		B9769EA71F665510008EC8B3 /* ProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EA61F665510008EC8B3 /* ProjectController.m */; };
 		B9769EAA1F6656CE008EC8B3 /* PropertyController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EA91F6656CE008EC8B3 /* PropertyController.m */; };
 		B9769EB81F66600D008EC8B3 /* EditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EB71F66600D008EC8B3 /* EditableCell.m */; };
 		B9769ED01F6665DF008EC8B3 /* ExcelLockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769EBB1F6665DF008EC8B3 /* ExcelLockCell.m */; };
@@ -38,20 +43,62 @@
 		B9769EDD1F6665DF008EC8B3 /* UILabel+FitWitdhAndHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769ECF1F6665DF008EC8B3 /* UILabel+FitWitdhAndHeight.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B95F4BFE1F6B6CEE00F1C52D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B95F4BF71F6B6CEE00F1C52D /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D53B5691047CFA413F2BD3922D7C9141;
+			remoteInfo = IQKeyboardManager;
+		};
+		B95F4C001F6B6CEE00F1C52D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B95F4BF71F6B6CEE00F1C52D /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 40C917408922487E026E8EEEEE6CD3B4;
+			remoteInfo = "Pods-CompareProj";
+		};
+		B95F4C021F6B6CEE00F1C52D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B95F4BF71F6B6CEE00F1C52D /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2E3DC5A0941414EFC0E147D39DBAAC2E;
+			remoteInfo = Realm;
+		};
+		B95F4C041F6B6CEE00F1C52D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B95F4BF71F6B6CEE00F1C52D /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C4C81617982F86BB88A6C210B21174D8;
+			remoteInfo = SSCheckBoxView;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		48E0CC8E142CB7995D1973A9 /* Pods_CompareProj.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CompareProj.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AC1856907FC9414B3DD20C /* Pods-CompareProj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompareProj.release.xcconfig"; path = "Pods/Target Support Files/Pods-CompareProj/Pods-CompareProj.release.xcconfig"; sourceTree = "<group>"; };
 		7B9E34CC7534A0E0F4179FD1 /* Pods-CompareProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompareProj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CompareProj/Pods-CompareProj.debug.xcconfig"; sourceTree = "<group>"; };
+		B95F4B601F6A2F3400F1C52D /* ProjectClassify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectClassify.h; sourceTree = "<group>"; };
+		B95F4B611F6A2F3400F1C52D /* ProjectClassify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectClassify.m; sourceTree = "<group>"; };
+		B95F4B631F6A300900F1C52D /* ClassifyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyController.h; sourceTree = "<group>"; };
+		B95F4B641F6A300900F1C52D /* ClassifyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClassifyController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B95F4BC11F6A563400F1C52D /* CompareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareController.h; sourceTree = "<group>"; };
+		B95F4BC21F6A563400F1C52D /* CompareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompareController.m; sourceTree = "<group>"; };
+		B95F4BF71F6B6CEE00F1C52D /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		B96902AA1F68CF1100943379 /* GlobalUIControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalUIControl.h; sourceTree = "<group>"; };
 		B96902AB1F68CF1100943379 /* GlobalUIControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalUIControl.m; sourceTree = "<group>"; };
 		B96903351F6919B100943379 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Property.h; sourceTree = "<group>"; };
 		B96903361F6919B100943379 /* Property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Property.m; sourceTree = "<group>"; };
+		B96A64601F6A11D700FEF4C2 /* ProjectDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectDetailController.h; sourceTree = "<group>"; };
+		B96A64611F6A11D700FEF4C2 /* ProjectDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectDetailController.m; sourceTree = "<group>"; };
+		B96A64631F6A15E900FEF4C2 /* ProjectDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectDetailCell.h; sourceTree = "<group>"; };
+		B96A64641F6A15E900FEF4C2 /* ProjectDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectDetailCell.m; sourceTree = "<group>"; };
 		B96F6B031F676E8B00878522 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		B96F6B041F676E8B00878522 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		B96F6B491F67D1E500878522 /* RLMRealm+AGDynamic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RLMRealm+AGDynamic.h"; sourceTree = "<group>"; };
 		B96F6B4A1F67D1E500878522 /* RLMRealm+AGDynamic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RLMRealm+AGDynamic.m"; sourceTree = "<group>"; };
-		B96F6B4C1F67E1A400878522 /* EditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditController.h; sourceTree = "<group>"; };
-		B96F6B4D1F67E1A400878522 /* EditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditController.m; sourceTree = "<group>"; };
+		B96F6B4C1F67E1A400878522 /* EditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EditController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B96F6B4D1F67E1A400878522 /* EditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EditController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B9769E591F66359C008EC8B3 /* CompareProj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompareProj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9769E5D1F66359C008EC8B3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B9769E5F1F66359C008EC8B3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -62,10 +109,10 @@
 		B9769E681F66359C008EC8B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9769E6B1F66359C008EC8B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9769E6D1F66359C008EC8B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B9769EA51F665510008EC8B3 /* EditProjControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProjControllerViewController.h; sourceTree = "<group>"; };
-		B9769EA61F665510008EC8B3 /* EditProjControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProjControllerViewController.m; sourceTree = "<group>"; };
+		B9769EA51F665510008EC8B3 /* ProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectController.h; sourceTree = "<group>"; };
+		B9769EA61F665510008EC8B3 /* ProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ProjectController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B9769EA81F6656CE008EC8B3 /* PropertyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyController.h; sourceTree = "<group>"; };
-		B9769EA91F6656CE008EC8B3 /* PropertyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyController.m; sourceTree = "<group>"; };
+		B9769EA91F6656CE008EC8B3 /* PropertyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PropertyController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B9769EB61F66600D008EC8B3 /* EditableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableCell.h; sourceTree = "<group>"; };
 		B9769EB71F66600D008EC8B3 /* EditableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableCell.m; sourceTree = "<group>"; };
 		B9769EBA1F6665DF008EC8B3 /* ExcelLockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelLockCell.h; sourceTree = "<group>"; };
@@ -113,9 +160,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B95F4BF81F6B6CEE00F1C52D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B95F4BFF1F6B6CEE00F1C52D /* IQKeyboardManager.framework */,
+				B95F4C011F6B6CEE00F1C52D /* Pods_CompareProj.framework */,
+				B95F4C031F6B6CEE00F1C52D /* Realm.framework */,
+				B95F4C051F6B6CEE00F1C52D /* SSCheckBoxView.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B9769E501F66359C008EC8B3 = {
 			isa = PBXGroup;
 			children = (
+				B95F4BF71F6B6CEE00F1C52D /* Pods.xcodeproj */,
 				B9769E5B1F66359C008EC8B3 /* CompareProj */,
 				B9769E5A1F66359C008EC8B3 /* Products */,
 				DA4F642538CAA1185A956B94 /* Pods */,
@@ -135,8 +194,8 @@
 			isa = PBXGroup;
 			children = (
 				B9769EB91F6665DF008EC8B3 /* ExcelView */,
-				B9769EA51F665510008EC8B3 /* EditProjControllerViewController.h */,
-				B9769EA61F665510008EC8B3 /* EditProjControllerViewController.m */,
+				B9769EA51F665510008EC8B3 /* ProjectController.h */,
+				B9769EA61F665510008EC8B3 /* ProjectController.m */,
 				B9769E5F1F66359C008EC8B3 /* AppDelegate.h */,
 				B9769E601F66359C008EC8B3 /* AppDelegate.m */,
 				B9769E621F66359C008EC8B3 /* ViewController.h */,
@@ -160,6 +219,16 @@
 				B96902AB1F68CF1100943379 /* GlobalUIControl.m */,
 				B96903351F6919B100943379 /* Property.h */,
 				B96903361F6919B100943379 /* Property.m */,
+				B96A64601F6A11D700FEF4C2 /* ProjectDetailController.h */,
+				B96A64611F6A11D700FEF4C2 /* ProjectDetailController.m */,
+				B96A64631F6A15E900FEF4C2 /* ProjectDetailCell.h */,
+				B96A64641F6A15E900FEF4C2 /* ProjectDetailCell.m */,
+				B95F4B601F6A2F3400F1C52D /* ProjectClassify.h */,
+				B95F4B611F6A2F3400F1C52D /* ProjectClassify.m */,
+				B95F4B631F6A300900F1C52D /* ClassifyController.h */,
+				B95F4B641F6A300900F1C52D /* ClassifyController.m */,
+				B95F4BC11F6A563400F1C52D /* CompareController.h */,
+				B95F4BC21F6A563400F1C52D /* CompareController.m */,
 			);
 			path = CompareProj;
 			sourceTree = "<group>";
@@ -261,12 +330,49 @@
 			mainGroup = B9769E501F66359C008EC8B3;
 			productRefGroup = B9769E5A1F66359C008EC8B3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B95F4BF81F6B6CEE00F1C52D /* Products */;
+					ProjectRef = B95F4BF71F6B6CEE00F1C52D /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B9769E581F66359C008EC8B3 /* CompareProj */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B95F4BFF1F6B6CEE00F1C52D /* IQKeyboardManager.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IQKeyboardManager.framework;
+			remoteRef = B95F4BFE1F6B6CEE00F1C52D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B95F4C011F6B6CEE00F1C52D /* Pods_CompareProj.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_CompareProj.framework;
+			remoteRef = B95F4C001F6B6CEE00F1C52D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B95F4C031F6B6CEE00F1C52D /* Realm.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Realm.framework;
+			remoteRef = B95F4C021F6B6CEE00F1C52D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B95F4C051F6B6CEE00F1C52D /* SSCheckBoxView.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SSCheckBoxView.framework;
+			remoteRef = B95F4C041F6B6CEE00F1C52D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B9769E571F66359C008EC8B3 /* Resources */ = {
@@ -342,7 +448,8 @@
 			files = (
 				B9769E641F66359C008EC8B3 /* ViewController.m in Sources */,
 				B9769ED91F6665DF008EC8B3 /* LockViewCell.m in Sources */,
-				B9769EA71F665510008EC8B3 /* EditProjControllerViewController.m in Sources */,
+				B96A64651F6A15E900FEF4C2 /* ProjectDetailCell.m in Sources */,
+				B9769EA71F665510008EC8B3 /* ProjectController.m in Sources */,
 				B96903371F6919B100943379 /* Property.m in Sources */,
 				B96F6B051F676E8B00878522 /* Project.m in Sources */,
 				B9769ED41F6665DF008EC8B3 /* ExcelSection.m in Sources */,
@@ -356,9 +463,13 @@
 				B96F6B4E1F67E1A400878522 /* EditController.m in Sources */,
 				B9769EAA1F6656CE008EC8B3 /* PropertyController.m in Sources */,
 				B96902AC1F68CF1100943379 /* GlobalUIControl.m in Sources */,
+				B95F4BC31F6A563400F1C52D /* CompareController.m in Sources */,
 				B96F6B4B1F67D1E500878522 /* RLMRealm+AGDynamic.m in Sources */,
 				B9769ED01F6665DF008EC8B3 /* ExcelLockCell.m in Sources */,
 				B9769EDB1F6665DF008EC8B3 /* ScrollViewCell.m in Sources */,
+				B95F4B651F6A300900F1C52D /* ClassifyController.m in Sources */,
+				B96A64621F6A11D700FEF4C2 /* ProjectDetailController.m in Sources */,
+				B95F4B621F6A2F3400F1C52D /* ProjectClassify.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +592,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6D7J43H33A;
 				INFOPLIST_FILE = CompareProj/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dxw.CompareProj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -494,6 +606,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6D7J43H33A;
 				INFOPLIST_FILE = CompareProj/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dxw.CompareProj;
 				PRODUCT_NAME = "$(TARGET_NAME)";

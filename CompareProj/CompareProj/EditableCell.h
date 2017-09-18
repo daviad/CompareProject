@@ -18,4 +18,5 @@
 @property(nonatomic,weak)id<EditableCellDelegate>delegate;
 @property(nonatomic,copy) NSString *text;
 @property(nonatomic,assign)BOOL editable;
+@property(nonatomic,assign)BOOL hasResponse;
 @end

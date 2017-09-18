@@ -4,4 +4,5 @@ use_frameworks!
 target 'CompareProj' do
   pod 'Realm'
   pod 'IQKeyboardManager'
+  pod 'SSCheckBoxView'
 end

@@ -10,6 +10,8 @@
 #import <Realm/Realm.h>
 #import "Property.h"
 
+RLM_ARRAY_TYPE(Project);
+
 @interface Project :  RLMObject
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,assign)NSInteger order;

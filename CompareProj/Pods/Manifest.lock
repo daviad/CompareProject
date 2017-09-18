@@ -3,15 +3,18 @@ PODS:
   - Realm (2.8.3):
     - Realm/Headers (= 2.8.3)
   - Realm/Headers (2.8.3)
+  - SSCheckBoxView (0.0.1)
 
 DEPENDENCIES:
   - IQKeyboardManager
   - Realm
+  - SSCheckBoxView
 
 SPEC CHECKSUMS:
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   Realm: 3601ef091c8c499a31101d8563b991e75546cdce
+  SSCheckBoxView: bd0d5f17f87114b9f09de4041e8cdcb1c097f69a
 
-PODFILE CHECKSUM: 1205a516791ac339f991879092399ad6baa1d8ed
+PODFILE CHECKSUM: aee507718c6409714ed6766a81f9822c132fdd09
 
 COCOAPODS: 1.2.0

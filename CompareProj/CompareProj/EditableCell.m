@@ -7,10 +7,12 @@
 //
 
 #import "EditableCell.h"
+#import <SSCheckBoxView/SSCheckBoxView.h>
 
 @interface EditableCell ()<UITextViewDelegate>
 {
     UITextView *_textView;
+    SSCheckBoxView *_checkBox;
 }
 @end
 
@@ -18,13 +20,15 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        _textView = [[UITextView alloc] initWithFrame:self.bounds];
+        _textView = [[UITextView alloc] init];
         _textView.textColor = [UIColor blackColor];
-        _textView.font = [UIFont systemFontOfSize:14];
+        _textView.font = [UIFont systemFontOfSize:16];
         [self.contentView addSubview:_textView];
         _textView.userInteractionEnabled = NO;
         _textView.delegate = self;
-//        _textView.laout
+        _checkBox = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(0, 0, 30, 30) style:kSSCheckBoxViewStyleMono checked:NO];
+        [_checkBox setStateChangedTarget:self selector:@selector(checkStatusChange)];
+        [self.contentView addSubview:_checkBox];
     }
     return self;
 }
@@ -37,6 +41,18 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    if (_editable) {
+        
+    }
+    
+    _checkBox.frame = CGRectMake(self.contentView.frame.size.width - 40, (self.frame.size.height - 30)/2, 30,30);
+    _checkBox.backgroundColor = [UIColor redColor];
+    _textView.frame = CGRectMake(0, 0, self.frame.size.width - 40, self.frame.size.height);
 }
 
 - (void)setText:(NSString *)text
@@ -58,5 +74,10 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     [self.delegate textEditDone:self text:textView.text];
+}
+#pragma mark- event
+- (void)checkStatusChange
+{
+    
 }
 @end

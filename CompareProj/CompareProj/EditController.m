@@ -32,7 +32,7 @@
 #define  ReuseCell   @"ReuseCell"
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView)];
+    [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     _isEditting = NO;
     // Do any additional setup after loading the view.
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -40,12 +40,7 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [_tableView registerClass:[EditableCell class] forCellReuseIdentifier:ReuseCell];
-    UIButton *addBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 44)];
-    [addBtn setTitle:@"add ...." forState:UIControlStateNormal];
-    [addBtn addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
-    //    [addBtn setTintColor:[UIColor redColor]];
-    [addBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    _tableView.tableFooterView = addBtn;
+    [self creatTableFootView];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -56,6 +51,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)creatTableFootView
+{
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 44)];
+    
+    UIButton *addBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 0, 100, 44)];
+    [addBtn setTitle:@"add ...." forState:UIControlStateNormal];
+    [addBtn addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
+    //    [addBtn setTintColor:[UIColor redColor]];
+    [addBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [footView addSubview:addBtn];
+
+    UIButton *compareBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 100, 44)];
+    [compareBtn setTitle:@"compare ...." forState:UIControlStateNormal];
+    [compareBtn addTarget:self action:@selector(compare) forControlEvents:UIControlEventTouchUpInside];
+    //    [addBtn setTintColor:[UIColor redColor]];
+    [compareBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [footView addSubview:compareBtn];
+    
+    _tableView.tableFooterView = footView;
+}
 #pragma mark- @protocol UITableViewDataSource<NSObject>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -153,7 +168,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.delegate jumpToDetailControllerWithIndex:indexPath.row];
+    NSString *str = [_dataArr objectAtIndex:indexPath.row];
+    if (str.length > 0) {
+        [self.delegate jumpToDetailControllerWithIndex:indexPath.row];
+    }
+    else
+    {
+        
+    }
 }
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -178,7 +200,7 @@
     if ([self.delegate needEidtDetail]) {
         UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"eidt" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
             NSLog(@"");
-            [weakSelf.delegate clickEditDetail];
+            [weakSelf.delegate clickEditDetailAtIndexPath:indexPath];
             tableView.editing = NO;
         }];
         [resultArr addObject:action0];
@@ -224,23 +246,35 @@
 #pragma mark-- evnet
 - (void)addItem
 {
-    [_dataArr addObject:@""];
-    //    [_tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_projs.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
-    [self editTableView];
-    
+    NSString *lastStr = [_dataArr lastObject];
+    if (![lastStr isEqualToString:@""] && !_isEditting)
+    {
+        [_dataArr addObject:@""];
+        //    [_tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_projs.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+        _isEditting = YES;
+        [self editTableView];
+    }
 }
 
-- (void)editTableView
+- (void)compare
+{
+    [self.delegate compare];
+}
+
+- (void)toggleEditStatus
 {
     _isEditting = !_isEditting;
-    
+    [self editTableView];
+}
+- (void)editTableView
+{
     if (_isEditting)
     {
-        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView)];
+        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     }
     else
     {
-        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editTableView)];
+        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     }
     [_tableView setEditing:_isEditting animated:YES];
     [_tableView reloadData];
@@ -263,12 +297,17 @@
         if (!isexist)
         {
             [_dataArr replaceObjectAtIndex:index.row withObject:text];
-            [self.delegate addItem:text atIndex:index.row];
+            [self.delegate editItem:text atIndex:index.row];
         }
         else
         {
             NSLog(@"please new item");
         }
+    }
+    else
+    {
+        [_dataArr removeLastObject];
+        [self editTableView];
     }
 }
 
