@@ -22,4 +22,5 @@
 @interface EditController : UIViewController
 - (instancetype)initWithDataArr:(NSMutableArray*)arr;
 @property(nonatomic,weak)id<EditControllerDelegate>delegate;
+@property(nonatomic,assign)BOOL needCompare;
 @end

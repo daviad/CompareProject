@@ -53,22 +53,30 @@
 
 - (void)creatTableFootView
 {
-    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 44)];
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 50)];
     
-    UIButton *addBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 0, 100, 44)];
-    [addBtn setTitle:@"add ...." forState:UIControlStateNormal];
+    UIButton *addBtn = [[UIButton alloc] init];
+    [addBtn setTitle:@"add" forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
     //    [addBtn setTintColor:[UIColor redColor]];
     [addBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [footView addSubview:addBtn];
-
-    UIButton *compareBtn = [[UIButton alloc] initWithFrame:CGRectMake(320, 0, 100, 44)];
-    [compareBtn setTitle:@"compare ...." forState:UIControlStateNormal];
+    addBtn.backgroundColor = [UIColor blueColor];
+   
+    UIButton *compareBtn = [[UIButton alloc] init];
+    [compareBtn setTitle:@"compare" forState:UIControlStateNormal];
     [compareBtn addTarget:self action:@selector(compare) forControlEvents:UIControlEventTouchUpInside];
-    //    [addBtn setTintColor:[UIColor redColor]];
+    compareBtn.backgroundColor = [UIColor blueColor];
     [compareBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [footView addSubview:compareBtn];
     
+    if (self.needCompare && _dataArr.count > 1) {
+        addBtn.frame = CGRectMake((_tableView.frame.size.width/4 - 80/2), 3, 80, 44);
+        compareBtn.frame = CGRectMake((_tableView.frame.size.width/2 + 80/2), 9, 80, 44);
+        [footView addSubview:addBtn];
+        [footView addSubview:compareBtn];
+    } else {
+        addBtn.frame = CGRectMake((_tableView.frame.size.width/2 - 80/2), 3, 80, 44);
+        [footView addSubview:addBtn];
+    }
     _tableView.tableFooterView = footView;
 }
 #pragma mark- @protocol UITableViewDataSource<NSObject>
@@ -247,7 +255,7 @@
 - (void)addItem
 {
     NSString *lastStr = [_dataArr lastObject];
-    if (![lastStr isEqualToString:@""] && !_isEditting)
+    if (![lastStr isEqualToString:@""])
     {
         [_dataArr addObject:@""];
         //    [_tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_projs.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
@@ -298,6 +306,10 @@
         {
             [_dataArr replaceObjectAtIndex:index.row withObject:text];
             [self.delegate editItem:text atIndex:index.row];
+            
+            if (_dataArr.count == 2) {
+                [self creatTableFootView];
+            }
         }
         else
         {

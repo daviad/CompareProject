@@ -12,7 +12,7 @@
 @interface EditableCell ()<UITextViewDelegate>
 {
     UITextView *_textView;
-    SSCheckBoxView *_checkBox;
+//    SSCheckBoxView *_checkBox;
 }
 @end
 
@@ -26,9 +26,9 @@
         [self.contentView addSubview:_textView];
         _textView.userInteractionEnabled = NO;
         _textView.delegate = self;
-        _checkBox = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(0, 0, 30, 30) style:kSSCheckBoxViewStyleMono checked:NO];
-        [_checkBox setStateChangedTarget:self selector:@selector(checkStatusChange)];
-        [self.contentView addSubview:_checkBox];
+//        _checkBox = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(0, 0, 30, 30) style:kSSCheckBoxViewStyleMono checked:NO];
+//        [_checkBox setStateChangedTarget:self selector:@selector(checkStatusChange)];
+//        [self.contentView addSubview:_checkBox];
     }
     return self;
 }
@@ -50,9 +50,9 @@
         
     }
     
-    _checkBox.frame = CGRectMake(self.contentView.frame.size.width - 40, (self.frame.size.height - 30)/2, 30,30);
-    _checkBox.backgroundColor = [UIColor redColor];
-    _textView.frame = CGRectMake(0, 0, self.frame.size.width - 40, self.frame.size.height);
+//    _checkBox.frame = CGRectMake(self.contentView.frame.size.width - 40, (self.frame.size.height - 30)/2, 30,30);
+//    _checkBox.backgroundColor = [UIColor redColor];
+    _textView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 }
 
 - (void)setText:(NSString *)text

@@ -45,6 +45,7 @@
     EditController *childCtr = [[EditController alloc] initWithDataArr:tempArr];
     [self addChildViewController:childCtr];
     childCtr.delegate = self;
+    childCtr.needCompare = YES;
     [self.view addSubview:childCtr.view];
 }
 

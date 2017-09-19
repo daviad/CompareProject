@@ -11,6 +11,7 @@
 @interface ProjectDetailCell ()<UITextViewDelegate>
 @property(nonatomic,strong)UITextView *keyTextView;
 @property(nonatomic,strong)UITextView *valueTextView;
+@property(nonatomic,strong)UIView *line;
 @end
 
 @implementation ProjectDetailCell
@@ -25,6 +26,10 @@
         _valueTextView = [[UITextView alloc] init];
         [self.contentView addSubview:_valueTextView];
         _valueTextView.delegate = self;
+        
+        _line = [[UIView alloc] init];
+        _line.backgroundColor = [UIColor grayColor];
+        [self.contentView addSubview:_line];
 }
     return self;
 }
@@ -42,8 +47,9 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    _keyTextView.frame = CGRectMake(0, 0, self.frame.size.width/2, self.frame.size.height);
-    _valueTextView.frame = CGRectMake(self.frame.size.width/2, 0, self.frame.size.width/2, self.frame.size.height);
+    _keyTextView.frame = CGRectMake(0, 0, self.contentView.frame.size.width/2, self.contentView.frame.size.height);
+    _valueTextView.frame = CGRectMake(self.contentView.frame.size.width/2, 0, self.contentView.frame.size.width/2, self.contentView.frame.size.height);
+    _line.frame = CGRectMake(self.contentView.frame.size.width/2, 0, 1, self.contentView.frame.size.height);
 }
 
 - (void)setEditable:(BOOL)editable
@@ -57,6 +63,8 @@
         
         _valueTextView.layer.borderWidth = 1;
         _valueTextView.layer.borderColor = [UIColor darkGrayColor].CGColor;
+        
+        _line.backgroundColor = [UIColor clearColor];
     }
     else
     {
@@ -65,6 +73,8 @@
         
         _valueTextView.layer.borderWidth = 0;
 //        _valueTextView.layer.borderColor = [UIColor darkGrayColor].CGColor;
+        
+        _line.backgroundColor = [UIColor grayColor];
     }
     
 }

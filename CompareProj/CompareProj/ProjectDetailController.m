@@ -46,10 +46,7 @@
     [self.view addSubview:_contentTB];
     [_contentTB registerClass:[ProjectDetailCell class] forCellReuseIdentifier:ReuseCellProjectDetailCell];
     
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(_contentTB.frame.size.width/2, 0, 1, self.view.frame.size.height)];
-    line.backgroundColor = [UIColor grayColor];
-    [_contentTB addSubview:line];
-    
+    _contentTB.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)didReceiveMemoryWarning {

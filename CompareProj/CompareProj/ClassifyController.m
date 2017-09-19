@@ -91,14 +91,18 @@
 
 - (void)editController:(EditController *)ctr moveRowAtIndex:(NSInteger)sourceIndex toIndex:(NSInteger)destinationIndex
 {
-    ProjectClassify *sp = [_classifies objectAtIndex:sourceIndex];
-    ProjectClassify *dp = [_classifies objectAtIndex:destinationIndex];
-    
-    [[RLMRealm defaultRealm] transactionWithBlock:^{
-        sp.order = destinationIndex;
-        dp.order = sourceIndex;
-    }];
-    
+    if (sourceIndex >= _classifies.count || destinationIndex >= _classifies.count) {
+        return;
+    }
+    if (sourceIndex != destinationIndex) {
+        ProjectClassify *sp = [_classifies objectAtIndex:sourceIndex];
+        ProjectClassify *dp = [_classifies objectAtIndex:destinationIndex];
+        
+        [[RLMRealm defaultRealm] transactionWithBlock:^{
+            sp.order = destinationIndex;
+            dp.order = sourceIndex;
+        }];
+    }
 }
 - (void)compare
 {
