@@ -84,13 +84,13 @@
         p = [[Project alloc] init];
         p.name = text;
         p.order = index;
+        p.classify = self.projectClassify;
         NSMutableArray *pros = [NSMutableArray array];
         for (Property *pro in self.projectClassify.rlmProperties) {
             [pros addObject:[pro customCopy]];
         }
         [[RLMRealm defaultRealm] transactionWithBlock:^{
             [p.rlmProperties addObjects:pros];
-            p.classify = self.projectClassify;
             [self.projectClassify.rlmProjects addObject:p];
         }];
     }

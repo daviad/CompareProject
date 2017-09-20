@@ -18,6 +18,7 @@
 @property(nonatomic,strong)UITableView *contentTB;
 @property(nonatomic,strong)Project *project;
 @property(nonatomic,strong)Property *fakeProperty;
+@property(nonatomic,strong)RLMResults<Property*> *sortProperties;
 
 @end
 
@@ -46,6 +47,8 @@
     [self.view addSubview:_contentTB];
     [_contentTB registerClass:[ProjectDetailCell class] forCellReuseIdentifier:ReuseCellProjectDetailCell];
     [self createFooterView];
+    
+    self.sortProperties = [self.project.rlmProperties sortedResultsUsingKeyPath:@"order" ascending:YES];
 }
 
 - (void)createFooterView
@@ -104,7 +107,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     Property *p = _fakeProperty;
     if (indexPath.row < self.project.rlmProperties.count) {
-      p = [self.project.rlmProperties objectAtIndex:indexPath.row];
+      p = [self.sortProperties objectAtIndex:indexPath.row];
     }
     [cell setKey:p.name value:p.value];
     cell.editable = _isEditting;
@@ -135,7 +138,7 @@
             }
             
             if (![self.project.classify.properties containsObject:text]) {
-                [self addAllDBProperty];
+                [self addOtherDBProperty];
                 [[RLMRealm defaultRealm] transactionWithBlock:^{
                     [self.project.classify.rlmProperties addObject:_fakeProperty];
                 }];
@@ -150,21 +153,25 @@
         }
     }
 }
-- (void)addAllDBProperty
+- (void)addOtherDBProperty
 {
-    RLMResults *ps = [[Project allObjects] objectsWhere:[NSString stringWithFormat:@"name = %@",self.project.name]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"classify.name == %@ and name != %@ ",self.project.classify.name,self.project.name];
+    RLMResults *ps  = [Project objectsWithPredicate:pred];
     [[RLMRealm defaultRealm] transactionWithBlock:^{
         for (Project *p in ps) {
-            [p.rlmProperties addObject:_fakeProperty];
+            if (![p.name isEqualToString:self.project.name]) {
+                [p.rlmProperties addObject:[_fakeProperty customCopy]];
+            }
         }
     }];
 }
 - (void)freshPropertyNameWith:(NSString*)oldName newName:(NSString*)newName
 {
     //此处 查询可以 级联么？
-   RLMResults *ps = [[Project allObjects] objectsWhere:[NSString stringWithFormat:@"name = %@",self.project.name]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"classify.name == %@",self.project.classify.name];
+   RLMResults *ps  = [Project objectsWithPredicate:pred];
     for (Project *p in ps) {
-        RLMResults *pros = [p.rlmProperties objectsWhere:[NSString stringWithFormat:@"name = %@",oldName]];
+        RLMResults *pros = [p.rlmProperties objectsWhere:[NSString stringWithFormat:@"name == %@",oldName]];
         for (Property *pro in pros) {
             [[RLMRealm defaultRealm] transactionWithBlock:^{
                 pro.name = newName;
@@ -216,6 +223,7 @@
 - (void)addItem
 {
     _fakeProperty = [[Property alloc] init];
+    _fakeProperty.order = self.project.classify.rlmProperties.count;
     [_contentTB beginUpdates];
     [_contentTB insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.project.rlmProperties.count inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
     [_contentTB endUpdates];
