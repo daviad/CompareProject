@@ -15,6 +15,7 @@
 		B96903371F6919B100943379 /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = B96903361F6919B100943379 /* Property.m */; };
 		B96A64621F6A11D700FEF4C2 /* ProjectDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96A64611F6A11D700FEF4C2 /* ProjectDetailController.m */; };
 		B96A64651F6A15E900FEF4C2 /* ProjectDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B96A64641F6A15E900FEF4C2 /* ProjectDetailCell.m */; };
+		B96CAB481F71FAF900F0DB61 /* readme.md in Sources */ = {isa = PBXBuildFile; fileRef = B96CAB471F71FAF900F0DB61 /* readme.md */; };
 		B96F6B051F676E8B00878522 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = B96F6B041F676E8B00878522 /* Project.m */; };
 		B96F6B4B1F67D1E500878522 /* RLMRealm+AGDynamic.m in Sources */ = {isa = PBXBuildFile; fileRef = B96F6B4A1F67D1E500878522 /* RLMRealm+AGDynamic.m */; };
 		B96F6B4E1F67E1A400878522 /* EditController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96F6B4D1F67E1A400878522 /* EditController.m */; };
@@ -93,6 +94,7 @@
 		B96A64611F6A11D700FEF4C2 /* ProjectDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectDetailController.m; sourceTree = "<group>"; };
 		B96A64631F6A15E900FEF4C2 /* ProjectDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectDetailCell.h; sourceTree = "<group>"; };
 		B96A64641F6A15E900FEF4C2 /* ProjectDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectDetailCell.m; sourceTree = "<group>"; };
+		B96CAB471F71FAF900F0DB61 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		B96F6B031F676E8B00878522 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		B96F6B041F676E8B00878522 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		B96F6B491F67D1E500878522 /* RLMRealm+AGDynamic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RLMRealm+AGDynamic.h"; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		B9769E501F66359C008EC8B3 = {
 			isa = PBXGroup;
 			children = (
+				B96CAB471F71FAF900F0DB61 /* readme.md */,
 				B95F4BF71F6B6CEE00F1C52D /* Pods.xcodeproj */,
 				B9769E5B1F66359C008EC8B3 /* CompareProj */,
 				B9769E5A1F66359C008EC8B3 /* Products */,
@@ -454,6 +457,7 @@
 				B96F6B051F676E8B00878522 /* Project.m in Sources */,
 				B9769ED41F6665DF008EC8B3 /* ExcelSection.m in Sources */,
 				B9769E611F66359C008EC8B3 /* AppDelegate.m in Sources */,
+				B96CAB481F71FAF900F0DB61 /* readme.md in Sources */,
 				B9769ED81F6665DF008EC8B3 /* ExcelView.m in Sources */,
 				B9769EB81F66600D008EC8B3 /* EditableCell.m in Sources */,
 				B9769ED61F6665DF008EC8B3 /* ExcelUnLockCell.m in Sources */,

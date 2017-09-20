@@ -66,7 +66,13 @@
 
 - (void)deleteRowsAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.row < _classify.rlmProperties.count)
+    {
+        Property *p = [_classify.rlmProperties objectAtIndex:indexPath.row];
+        [[RLMRealm defaultRealm] transactionWithBlock:^{
+            [[RLMRealm defaultRealm] deleteObject:p];
+        }];
+    }
 }
 - (void)editItem:(NSString *)text atIndex:(NSInteger)index
 {

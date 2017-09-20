@@ -9,14 +9,15 @@
 #import "ProjectDetailController.h"
 #import "ProjectDetailCell.h"
 #import "Property.h"
+#import "ProjectClassify.h"
 
 @interface ProjectDetailController ()<UITableViewDelegate,UITableViewDataSource,ProjectDetailCellDelegate>
 {
     BOOL _isEditting;
 }
 @property(nonatomic,strong)UITableView *contentTB;
-//@property(nonatomic,strong)NSMutableArray *properties;
 @property(nonatomic,strong)Project *project;
+@property(nonatomic,strong)Property *fakeProperty;
 
 @end
 
@@ -26,7 +27,6 @@
 {
     if (self = [super init]) {
         self.project = p;
-//        self.properties = p.properties;
     }
     return self;
 }
@@ -45,10 +45,21 @@
     _contentTB.dataSource = self;
     [self.view addSubview:_contentTB];
     [_contentTB registerClass:[ProjectDetailCell class] forCellReuseIdentifier:ReuseCellProjectDetailCell];
-    
-    _contentTB.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self createFooterView];
 }
 
+- (void)createFooterView
+{
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _contentTB.frame.size.width, 50)];
+    UIButton *addBtn = [[UIButton alloc] init];
+    [addBtn setTitle:@"add" forState:UIControlStateNormal];
+    [addBtn addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    addBtn.backgroundColor = [UIColor blueColor];
+    addBtn.frame = CGRectMake((_contentTB.frame.size.width/2 - 80/2), 3, 80, 44);
+    [footView addSubview:addBtn];
+    _contentTB.tableFooterView = footView;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -80,20 +91,21 @@
     
     return resultArr;
 }
-//- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
-//{
-//    
-//}
+
 #pragma mark- UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.project.rlmProperties.count;
+    return _fakeProperty ? (self.project.rlmProperties.count + 1) : self.project.rlmProperties.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ProjectDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseCellProjectDetailCell];
-    Property *p = [self.project.rlmProperties objectAtIndex:indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    Property *p = _fakeProperty;
+    if (indexPath.row < self.project.rlmProperties.count) {
+      p = [self.project.rlmProperties objectAtIndex:indexPath.row];
+    }
     [cell setKey:p.name value:p.value];
     cell.editable = _isEditting;
     cell.delegate = self;
@@ -114,60 +126,78 @@
 - (void)keyEditDone:(ProjectDetailCell*)cell text:(NSString*)text
 {
     if (text.length > 0) {
-        NSIndexPath *index = [_contentTB indexPathForCell:cell];
-        Property *p = self.project.rlmProperties[index.row];
-        [[RLMRealm defaultRealm] transactionWithBlock:^{
-            p.name = text;
-        }];
+        if (_fakeProperty) {
+            _fakeProperty.name = text;
+            if (![self.project.properties containsObject:text]) {
+                [[RLMRealm defaultRealm] transactionWithBlock:^{
+                    [self.project.rlmProperties addObject:_fakeProperty];
+                }];
+            }
+            
+            if (![self.project.classify.properties containsObject:text]) {
+                [self addAllDBProperty];
+                [[RLMRealm defaultRealm] transactionWithBlock:^{
+                    [self.project.classify.rlmProperties addObject:_fakeProperty];
+                }];
+            }
+            _fakeProperty = nil;
+        } else {
+            NSIndexPath *index = [_contentTB indexPathForCell:cell];
+            Property *p = self.project.rlmProperties[index.row];
+            if (![text isEqualToString:p.name]) {
+                [self freshPropertyNameWith:p.name newName:text];
+            }
+        }
+    }
+}
+- (void)addAllDBProperty
+{
+    RLMResults *ps = [[Project allObjects] objectsWhere:[NSString stringWithFormat:@"name = %@",self.project.name]];
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        for (Project *p in ps) {
+            [p.rlmProperties addObject:_fakeProperty];
+        }
+    }];
+}
+- (void)freshPropertyNameWith:(NSString*)oldName newName:(NSString*)newName
+{
+    //此处 查询可以 级联么？
+   RLMResults *ps = [[Project allObjects] objectsWhere:[NSString stringWithFormat:@"name = %@",self.project.name]];
+    for (Project *p in ps) {
+        RLMResults *pros = [p.rlmProperties objectsWhere:[NSString stringWithFormat:@"name = %@",oldName]];
+        for (Property *pro in pros) {
+            [[RLMRealm defaultRealm] transactionWithBlock:^{
+                pro.name = newName;
+            }];
+        }
     }
 }
 - (void)valueEditDone:(ProjectDetailCell*)cell text:(NSString*)text
 {
     if (text.length > 0) {
-        NSIndexPath *index = [_contentTB indexPathForCell:cell];
-        Property *p = self.project.rlmProperties[index.row];
-        [[RLMRealm defaultRealm] transactionWithBlock:^{
-            p.value = text;
-        }];
+        if (_fakeProperty) {
+            _fakeProperty.value = text;
+            [[RLMRealm defaultRealm] transactionWithBlock:^{
+                [self.project.rlmProperties addObject:_fakeProperty];
+            }];
+            _fakeProperty = nil;
+        } else {
+            NSIndexPath *index = [_contentTB indexPathForCell:cell];
+            Property *p = self.project.rlmProperties[index.row];
+            [[RLMRealm defaultRealm] transactionWithBlock:^{
+                p.value = text;
+            }];
+        }
     }
 }
 
-//- (void)editProperty:(Property*)p withName:(NSString*)n withValue:(NSString*)v
-//{
-//    NSMutableArray *originArr = [NSMutableArray array];
-//    for (Property *pro in self.project.rlmProperties) {
-//        if (n) {
-//            [originArr addObject:pro.name];
-//        }
-//        else
-//        {
-//            [originArr addObject:pro.value];
-//        }
-//    }
-//
-//    NSString *tempStr = n?n:v;
-//    if ([originArr containsObject:tempStr])
-//    {
-//        if (n) {
-//            p.name = n;
-//        }
-//        else
-//        {
-//            p.value = v;
-//        }
-//    }
-//    else
-//    {
-//        NSLog(@"please new item");
-//    }
-//
-//}
 #pragma mark- event
 - (void)toggleEditStatus
 {
     _isEditting = !_isEditting;
     [self editTableView];
 }
+
 - (void)editTableView
 {
     
@@ -183,4 +213,11 @@
     [_contentTB reloadData];
 }
 
+- (void)addItem
+{
+    _fakeProperty = [[Property alloc] init];
+    [_contentTB beginUpdates];
+    [_contentTB insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.project.rlmProperties.count inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+    [_contentTB endUpdates];
+}
 @end

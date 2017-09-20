@@ -90,6 +90,7 @@
         }
         [[RLMRealm defaultRealm] transactionWithBlock:^{
             [p.rlmProperties addObjects:pros];
+            p.classify = self.projectClassify;
             [self.projectClassify.rlmProjects addObject:p];
         }];
     }

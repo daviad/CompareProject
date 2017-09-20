@@ -16,7 +16,7 @@
 
 + (NSDictionary*)defaultPropertyValues
 {
-    return @{@"uuid":[[NSUUID UUID] UUIDString],@"value":@""};
+    return @{@"uuid":[[NSUUID UUID] UUIDString],@"name":@"",@"value":@"",@"count":@"0"};
 }
 
 - (Property*)customCopy

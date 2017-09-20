@@ -13,6 +13,7 @@ RLM_ARRAY_TYPE(Property);
 @property(nonatomic,copy)NSString *uuid;
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *value;
+@property(nonatomic,assign)NSInteger count;
 //@property(nonatomic,strong)Project *project;
 @property(nonatomic,assign)NSInteger order;
 

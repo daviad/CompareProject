@@ -53,6 +53,11 @@
 //    _checkBox.frame = CGRectMake(self.contentView.frame.size.width - 40, (self.frame.size.height - 30)/2, 30,30);
 //    _checkBox.backgroundColor = [UIColor redColor];
     _textView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    for (UIView *subview in self.contentView.superview.subviews) {
+        if ([NSStringFromClass(subview.class) hasSuffix:@"SeparatorView"]) {
+            subview.hidden = NO;
+        }
+    }
 }
 
 - (void)setText:(NSString *)text

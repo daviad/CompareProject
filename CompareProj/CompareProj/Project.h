@@ -12,9 +12,11 @@
 
 RLM_ARRAY_TYPE(Project);
 
+@class ProjectClassify;
 @interface Project :  RLMObject
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,assign)NSInteger order;
+@property(nonatomic,strong)ProjectClassify *classify;
 @property(nonatomic,strong)NSMutableArray<NSString*> *properties;
 @property RLMArray<Property *><Property> *rlmProperties;
 @end
