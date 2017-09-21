@@ -20,15 +20,23 @@
 }
 
 + (NSArray *)ignoredProperties {
-    return @[@"properties"];
+    return @[@"properties",@"sortPoperties"];
 }
 
 - (NSMutableArray*)properties
 {
     NSMutableArray *tempArr = [[NSMutableArray alloc] initWithCapacity:self.rlmProperties.count];
-    for (Property *p in self.rlmProperties) {
+    for (Property *p in self.sortPoperties) {
         [tempArr addObject:p.name];
     }
     return tempArr;
+}
+
+- (RLMResults*)sortPoperties
+{
+    if (!_sortPoperties) {
+        _sortPoperties = [self.rlmProperties sortedResultsUsingKeyPath:@"order" ascending:YES];
+    }
+    return _sortPoperties;
 }
 @end

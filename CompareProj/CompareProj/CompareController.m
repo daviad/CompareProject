@@ -15,6 +15,7 @@
 @property(nonatomic,retain) NSMutableArray *excelDataArray;//表格数据
 @property(nonatomic,retain) NSMutableArray *rightTableHeadArray;//表格第一行表头数据
 @property(nonatomic,retain) NSMutableArray *allTableDataArray;//表格所有数据
+@property(nonatomic,strong) ProjectClassify *projectClassify;
 @end
 
 @implementation CompareController
@@ -23,7 +24,8 @@
 {
     NSMutableArray *tempArr = [[NSMutableArray alloc] init];
     self.title = pc.name;
-    for (Project *p in pc.rlmProjects) {
+    self.projectClassify = pc;
+    for (Project *p in pc.sortPoperties) {
         [tempArr addObject:p];
     }
     self.leftTableDataArray = pc.properties;
@@ -35,19 +37,30 @@
     if (self = [super init]) {
         NSMutableArray *headers = [[NSMutableArray alloc] init];
         NSMutableArray *excellArr = [NSMutableArray array];
-        NSMutableArray *row1Arr = [NSMutableArray array];
+        Project *oneProj = pjs.firstObject;
         for (Project *p in pjs) {
             [headers addObject:p.name];
-            Property *pro = [p.rlmProperties firstObject];
-            [row1Arr addObject:pro.value];
         }
-        [excellArr addObject:row1Arr];
 
-        for (int i = 1; i < self.leftTableDataArray.count; i++) {
+        RLMResults *sortClsPros = [oneProj.classify.rlmProperties sortedResultsUsingKeyPath:@"order" ascending:YES];
+        int m = 0;
+        for (int i = 0; i < self.leftTableDataArray.count; i++) {
             NSMutableArray *rowArr = [NSMutableArray array];
-            for (Project *p in pjs) {
-                Property *pro = [p.rlmProperties objectAtIndex:i];
-                [rowArr addObject:pro.value];
+            for (int j = 0; j < pjs.count; j++) {
+                Project *pj = [pjs objectAtIndex:j];
+                if (sortClsPros.count == pj.sortProperties.count) {
+                    Property *pro = [pj.sortProperties objectAtIndex:i];
+                    [rowArr addObject:pro.value];
+                } else {
+                    Property *clsPro = [sortClsPros objectAtIndex:i];
+                    Property *pro = [pj.sortProperties objectAtIndex:m];
+                    if ([clsPro.name isEqualToString:pro.name]) {
+                        [rowArr addObject:pro.value];
+                        m ++;
+                    } else {
+                        [rowArr addObject:@""];
+                    }
+                }
             }
             [excellArr addObject:rowArr];
         }

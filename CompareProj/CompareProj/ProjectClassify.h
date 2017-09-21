@@ -15,4 +15,5 @@
 @property(nonatomic,strong)NSMutableArray<NSString*> *properties;
 @property RLMArray<Project *><Project> *rlmProjects;
 @property RLMArray<Property *><Property> *rlmProperties;
+@property(nonatomic,strong)RLMResults *sortPoperties;
 @end

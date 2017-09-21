@@ -19,4 +19,5 @@ RLM_ARRAY_TYPE(Project);
 @property(nonatomic,strong)ProjectClassify *classify;
 @property(nonatomic,strong)NSMutableArray<NSString*> *properties;
 @property RLMArray<Property *><Property> *rlmProperties;
+@property (nonatomic,strong)RLMResults *sortProperties;
 @end
