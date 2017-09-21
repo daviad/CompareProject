@@ -8,13 +8,13 @@
 
 #import <Realm/Realm.h>
 RLM_ARRAY_TYPE(Property);
-//@class Project;
+@class ProjectClassify;
 @interface Property : RLMObject
 @property(nonatomic,copy)NSString *uuid;
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *value;
 @property(nonatomic,assign)NSInteger count;
-//@property(nonatomic,strong)Project *project;
+@property(nonatomic,strong)ProjectClassify *classify;
 @property(nonatomic,assign)NSInteger order;
 
 - (Property*)customCopy;

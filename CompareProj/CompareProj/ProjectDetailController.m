@@ -75,7 +75,7 @@
 }
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    __weak ProjectDetailController *weakSelf = self;
+    __weak ProjectDetailController *weakSelf = self;
     NSMutableArray *resultArr = [NSMutableArray array];
 
         UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"eidt" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
@@ -85,12 +85,12 @@
         [resultArr addObject:action0];
  
     
-//    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-//        [weakSelf.project.rlmProperties removeObjectAtIndex:indexPath.row];
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//        tableView.editing = NO;
-//    }];
-//    [resultArr addObject:action1];
+    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        [weakSelf.project.rlmProperties removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        tableView.editing = NO;
+    }];
+    [resultArr addObject:action1];
     
     return resultArr;
 }
@@ -116,13 +116,27 @@
 }
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    Property *sp = [self.project.rlmProperties objectAtIndex:sourceIndexPath.row];
-    Property *dp = [self.project.rlmProperties objectAtIndex:destinationIndexPath.row];
-    
-    [[RLMRealm defaultRealm] transactionWithBlock:^{
-        sp.order = destinationIndexPath.row;
-        dp.order = sourceIndexPath.row;
-    }];
+    if (sourceIndexPath.row >= _sortProperties.count || destinationIndexPath.row >= _sortProperties.count) {
+        return;
+    }
+    if (sourceIndexPath.row != destinationIndexPath.row) {
+        Property *sp = [self.sortProperties objectAtIndex:sourceIndexPath.row];
+        Property *dp = [self.sortProperties objectAtIndex:destinationIndexPath.row];
+        NSInteger sOrder = sp.order;
+        NSInteger dOrder = dp.order;
+        NSPredicate *sourcePred = [NSPredicate predicateWithFormat:@"classify.name == %@ and name == %@ ",self.project.classify.name, sp.name];
+        RLMResults *sourcePros  = [Property objectsWithPredicate:sourcePred];
+        NSPredicate *destPred = [NSPredicate predicateWithFormat:@"classify.name == %@ and name = %@ ",self.project.classify.name,dp.name];
+        RLMResults *destPros = [Property objectsWithPredicate:destPred];
+        [[RLMRealm defaultRealm] transactionWithBlock:^{
+            for (Property *pro in sourcePros) {
+                pro.order = dOrder;
+            }
+            for (Property *pro in destPros) {
+                pro.order = sOrder;
+            }
+        }];
+    }
 }
 
 #pragma mark- ProjectDetailCellDelegate
@@ -167,16 +181,12 @@
 }
 - (void)freshPropertyNameWith:(NSString*)oldName newName:(NSString*)newName
 {
-    //此处 查询可以 级联么？
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"classify.name == %@",self.project.classify.name];
-   RLMResults *ps  = [Project objectsWithPredicate:pred];
-    for (Project *p in ps) {
-        RLMResults *pros = [p.rlmProperties objectsWhere:[NSString stringWithFormat:@"name == %@",oldName]];
-        for (Property *pro in pros) {
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"classify.name == %@ and name == %@  ",self.project.classify.name, oldName];
+   RLMResults *pros  = [Property objectsWithPredicate:pred];
+    for (Property *pro in pros) {
             [[RLMRealm defaultRealm] transactionWithBlock:^{
                 pro.name = newName;
             }];
-        }
     }
 }
 - (void)valueEditDone:(ProjectDetailCell*)cell text:(NSString*)text
@@ -223,6 +233,7 @@
 - (void)addItem
 {
     _fakeProperty = [[Property alloc] init];
+    _fakeProperty.classify = self.project.classify;
     _fakeProperty.order = self.project.classify.rlmProperties.count;
     [_contentTB beginUpdates];
     [_contentTB insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.project.rlmProperties.count inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];

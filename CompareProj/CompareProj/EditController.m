@@ -223,7 +223,6 @@
     [resultArr addObject:action1];
     
     return resultArr;
-    
 }
 
 // Controls whether the background is indented while editing.  If not implemented, the default is YES.  This is unrelated to the indentation level below.  This method only applies to grouped style table views.

@@ -22,6 +22,7 @@
 - (instancetype)initWithClassify:(ProjectClassify *)pc
 {
     NSMutableArray *tempArr = [[NSMutableArray alloc] init];
+    self.title = pc.name;
     for (Project *p in pc.rlmProjects) {
         [tempArr addObject:p];
     }
@@ -68,7 +69,7 @@
     excelView.isLockFristColumn=YES;
     excelView.isLockFristRow=YES;
     excelView.isColumnTitlte=YES;
-    excelView.columnTitlte=@"地区";
+    excelView.columnTitlte=self.title;
     [excelView show];
     [self.view addSubview:excelView];
     

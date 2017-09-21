@@ -24,6 +24,7 @@
     Property *proNew = [[Property alloc] init];
     proNew.name = self.name;
     proNew.order = self.order;
+    proNew.classify = self.classify;
     return proNew;
 }
 @end
