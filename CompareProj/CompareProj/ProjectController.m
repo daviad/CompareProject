@@ -92,6 +92,9 @@
         [[RLMRealm defaultRealm] transactionWithBlock:^{
             [p.rlmProperties addObjects:pros];
             [self.projectClassify.rlmProjects addObject:p];
+            for (Property *cpro in self.projectClassify.rlmProperties) {
+                cpro.count ++;
+            }
         }];
     }
     else

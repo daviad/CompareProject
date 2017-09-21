@@ -79,14 +79,14 @@
     NSMutableArray *resultArr = [NSMutableArray array];
 
         UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"eidt" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-            NSLog(@"");
             tableView.editing = NO;
         }];
         [resultArr addObject:action0];
  
     
     UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        [weakSelf.project.rlmProperties removeObjectAtIndex:indexPath.row];
+        Property *pro = [weakSelf.sortProperties objectAtIndex:indexPath.row];
+        [weakSelf deleteProperty:pro];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         tableView.editing = NO;
     }];
@@ -144,20 +144,7 @@
 {
     if (text.length > 0) {
         if (_fakeProperty) {
-            _fakeProperty.name = text;
-            if (![self.project.properties containsObject:text]) {
-                [[RLMRealm defaultRealm] transactionWithBlock:^{
-                    [self.project.rlmProperties addObject:_fakeProperty];
-                }];
-            }
-            
-            if (![self.project.classify.properties containsObject:text]) {
-                [self addOtherDBProperty];
-                [[RLMRealm defaultRealm] transactionWithBlock:^{
-                    [self.project.classify.rlmProperties addObject:_fakeProperty];
-                }];
-            }
-            _fakeProperty = nil;
+            [self addPropertyNameWithProperty:text];
         } else {
             NSIndexPath *index = [_contentTB indexPathForCell:cell];
             Property *p = self.project.rlmProperties[index.row];
@@ -167,28 +154,7 @@
         }
     }
 }
-- (void)addOtherDBProperty
-{
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"classify.name == %@ and name != %@ ",self.project.classify.name,self.project.name];
-    RLMResults *ps  = [Project objectsWithPredicate:pred];
-    [[RLMRealm defaultRealm] transactionWithBlock:^{
-        for (Project *p in ps) {
-            if (![p.name isEqualToString:self.project.name]) {
-                [p.rlmProperties addObject:[_fakeProperty customCopy]];
-            }
-        }
-    }];
-}
-- (void)freshPropertyNameWith:(NSString*)oldName newName:(NSString*)newName
-{
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"classify.name == %@ and name == %@  ",self.project.classify.name, oldName];
-   RLMResults *pros  = [Property objectsWithPredicate:pred];
-    for (Property *pro in pros) {
-            [[RLMRealm defaultRealm] transactionWithBlock:^{
-                pro.name = newName;
-            }];
-    }
-}
+
 - (void)valueEditDone:(ProjectDetailCell*)cell text:(NSString*)text
 {
     if (text.length > 0) {
@@ -238,5 +204,74 @@
     [_contentTB beginUpdates];
     [_contentTB insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.project.rlmProperties.count inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
     [_contentTB endUpdates];
+}
+
+#pragma mark- utils
+- (void)addPropertyNameWithProperty:(NSString*)text
+{
+    _fakeProperty.name = text;
+    
+    if (![self.project.properties containsObject:text]) {
+        [[RLMRealm defaultRealm] transactionWithBlock:^{
+            [self.project.rlmProperties addObject:_fakeProperty];
+        }];
+    }
+    
+    Property *pro = [[self.project.classify.rlmProperties objectsWithPredicate:[NSPredicate predicateWithFormat:@"name == %@ ",text]] firstObject];
+    if (pro) {
+        [[RLMRealm defaultRealm] transactionWithBlock:^{
+            pro.count ++;
+        }];
+        [self addOtherDBPropertyIsNewProperty:NO withClassifyProperty:nil];
+    } else {
+        Property *newProperty = [_fakeProperty customCopy];
+        [[RLMRealm defaultRealm] transactionWithBlock:^{
+            [self.project.classify.rlmProperties addObject:newProperty];
+        }];
+        [self addOtherDBPropertyIsNewProperty:YES withClassifyProperty:newProperty];
+    }
+    
+    _fakeProperty = nil;
+}
+- (void)addOtherDBPropertyIsNewProperty:(BOOL)flag withClassifyProperty:(Property*)cpro
+{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"classify.name == %@ and name != %@ ",self.project.classify.name,self.project.name];
+    RLMResults *ps  = [Project objectsWithPredicate:pred];
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        for (Project *p in ps) {
+            if (flag) {
+                [p.rlmProperties addObject:[_fakeProperty customCopy]];
+                cpro.count ++;
+            } else if ([[p.rlmProperties objectsWithPredicate:[NSPredicate predicateWithFormat:@"name == %@ ",_fakeProperty.name]] count] == 0) {
+                [p.rlmProperties addObject:[_fakeProperty customCopy]];
+                cpro.count ++;
+            }
+        }
+    }];
+}
+
+- (void)freshPropertyNameWith:(NSString*)oldName newName:(NSString*)newName
+{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"classify.name == %@ and name == %@  ",self.project.classify.name, oldName];
+    RLMResults *pros  = [Property objectsWithPredicate:pred];
+    for (Property *pro in pros) {
+        [[RLMRealm defaultRealm] transactionWithBlock:^{
+            pro.name = newName;
+        }];
+    }
+}
+
+- (void)deleteProperty:(Property*)pro
+{
+    Property *classifyPro = [[self.project.classify.rlmProperties objectsWithPredicate:[NSPredicate predicateWithFormat:@"name == %@",pro.name]] firstObject];
+    NSAssert(classifyPro, @"classifyPro == nil");
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        [[RLMRealm defaultRealm] deleteObject:pro];
+        if (classifyPro.count == 1) {
+            [[RLMRealm defaultRealm] deleteObject:classifyPro];
+        } else {
+            classifyPro.count --;
+        }
+    }];
 }
 @end
