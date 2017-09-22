@@ -14,6 +14,7 @@
 {
     UITableView *_tableView;
     BOOL _isEditting;
+    NSString *_editingText;
 }
 @property(nonatomic,strong)NSMutableArray *dataArr;
 
@@ -34,6 +35,7 @@
     [super viewDidLoad];
     [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     _isEditting = NO;
+    _editingText = @"";
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.dataSource = self;
@@ -176,9 +178,9 @@
 #pragma mark-- evnet
 - (void)addItem
 {
-    NSString *lastStr = [_dataArr lastObject];
-    if (![lastStr isEqualToString:@""])
-    {
+    if ([self nameIsExist:[_editingText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]) {
+        
+    } else {
         [_dataArr addObject:@""];
         _isEditting = YES;
         [self editTableView];
@@ -194,6 +196,7 @@
 {
     _isEditting = !_isEditting;
     [self editTableView];
+     _editingText = @"";
 }
 - (void)editTableView
 {
@@ -206,25 +209,35 @@
         [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     }
     [_tableView setEditing:_isEditting animated:YES];
-    [_tableView reloadData];
+//    [_tableView reloadData];
 }
 
-
+- (BOOL)nameIsExist:(NSString*)name
+{
+    BOOL isexist = NO;
+    for (NSString *oldStr in _dataArr) {
+        if ([oldStr isEqualToString:name])
+        {
+            isexist = YES;
+        }
+    }
+    return isexist;
+}
 #pragma mark-  EditableCellDelegate <NSObject>
 - (void)textEditDone:(EditableCell*)cell text:(NSString*)text
 {
     if (text.length > 0) {
-        NSIndexPath *index = [_tableView indexPathForCell:cell];
-        BOOL isexist = NO;
-        for (NSString *oldStr in _dataArr) {
-            if ([oldStr isEqualToString:text])
-            {
-                isexist = YES;
-            }
+        if ([self nameIsExist:_editingText]) {
+            [_dataArr removeLastObject];
+            [self editTableView];
         }
-        
-        if (!isexist)
+        if ([self nameIsExist:text])
         {
+            NSLog(@"please new item");
+        }
+        else
+        {
+            NSIndexPath *index = [_tableView indexPathForCell:cell];
             [_dataArr replaceObjectAtIndex:index.row withObject:text];
             [self.delegate editItem:text atIndex:index.row];
             
@@ -232,16 +245,18 @@
                 [self creatTableFootView];
             }
         }
-        else
-        {
-            NSLog(@"please new item");
-        }
+
     }
     else
     {
         [_dataArr removeLastObject];
         [self editTableView];
     }
+   
 }
 
+- (void)textDidChange:(EditableCell *)cell tex:(NSString *)text
+{
+    _editingText = text;
+}
 @end

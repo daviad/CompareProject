@@ -12,6 +12,7 @@
 
 - (void)textEditDone:(EditableCell*)cell text:(NSString*)text;
 
+- (void)textDidChange:(EditableCell*)cell tex:(NSString*)text;
 @end
 
 @interface EditableCell : UITableViewCell

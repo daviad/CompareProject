@@ -50,8 +50,6 @@
         
     }
     
-//    _checkBox.frame = CGRectMake(self.contentView.frame.size.width - 40, (self.frame.size.height - 30)/2, 30,30);
-//    _checkBox.backgroundColor = [UIColor redColor];
     _textView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     for (UIView *subview in self.contentView.superview.subviews) {
         if ([NSStringFromClass(subview.class) hasSuffix:@"SeparatorView"]) {
@@ -79,6 +77,11 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     [self.delegate textEditDone:self text:textView.text];
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    [self.delegate textDidChange:self tex:textView.text];
 }
 #pragma mark- event
 - (void)checkStatusChange
