@@ -16,4 +16,6 @@
 @property RLMArray<Project *><Project> *rlmProjects;
 @property RLMArray<Property *><Property> *rlmProperties;
 @property(nonatomic,strong)RLMResults *sortPoperties;
+@property(nonatomic,strong)RLMResults *sortProjects;
+
 @end

@@ -20,7 +20,7 @@
 }
 
 + (NSArray *)ignoredProperties {
-    return @[@"properties",@"sortPoperties"];
+    return @[@"properties",@"sortPoperties",@"sortProjects"];
 }
 
 - (NSMutableArray*)properties
@@ -38,5 +38,13 @@
         _sortPoperties = [self.rlmProperties sortedResultsUsingKeyPath:@"order" ascending:YES];
     }
     return _sortPoperties;
+}
+
+- (RLMResults*)sortProjects
+{
+    if (!_sortProjects) {
+        _sortProjects = [self.rlmProjects sortedResultsUsingKeyPath:@"order" ascending:YES];
+    }
+    return _sortProjects;
 }
 @end

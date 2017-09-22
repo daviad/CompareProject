@@ -25,7 +25,7 @@
     NSMutableArray *tempArr = [[NSMutableArray alloc] init];
     self.title = pc.name;
     self.projectClassify = pc;
-    for (Project *p in pc.sortPoperties) {
+    for (Project *p in pc.sortProjects) {
         [tempArr addObject:p];
     }
     self.leftTableDataArray = pc.properties;
