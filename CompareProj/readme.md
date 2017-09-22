@@ -2,3 +2,6 @@
 gcd 做线程安全
 
 属性的，增删改
+
+realm exchange 
+区别RLMAarray RLMResults addobject deletObject 

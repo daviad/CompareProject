@@ -25,7 +25,7 @@
 
 - (NSMutableArray*)properties
 {
-    NSMutableArray *tempArr = [[NSMutableArray alloc] initWithCapacity:self.rlmProperties.count];
+    NSMutableArray *tempArr = [[NSMutableArray alloc] initWithCapacity:self.sortPoperties.count];
     for (Property *p in self.sortPoperties) {
         [tempArr addObject:p.name];
     }

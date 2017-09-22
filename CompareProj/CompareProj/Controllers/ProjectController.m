@@ -28,7 +28,7 @@
 {
     if (self = [super init]) {
         self.projectClassify = pc;
-        _projects = [self.projectClassify.rlmProjects sortedResultsUsingKeyPath:@"order" ascending:YES];
+        _projects = self.projectClassify.sortProjects;
     }
     return self;
 }
@@ -71,11 +71,21 @@
     if (indexPath.row < _projects.count)
     {
         Project *p = [_projects objectAtIndex:indexPath.row];
+        NSArray *pros = p.properties;
         [[RLMRealm defaultRealm] transactionWithBlock:^{
+            for (Property *cpro in self.projectClassify.rlmProperties) {
+                if ([pros containsObject:cpro.name]) {
+                    if (cpro.count == 1) {
+                        [[RLMRealm defaultRealm] deleteObject:cpro];
+                    } else {
+                        cpro.count --;
+                    }
+                }
+            }
+            
             [[RLMRealm defaultRealm] deleteObject:p];
         }];
     }
-
 }
 - (void)editItem:(NSString *)text atIndex:(NSInteger)index
 {
@@ -86,7 +96,7 @@
         p.order = index;
         p.classify = self.projectClassify;
         NSMutableArray *pros = [NSMutableArray array];
-        for (Property *pro in self.projectClassify.rlmProperties) {
+        for (Property *pro in self.projectClassify.sortPoperties) {
             [pros addObject:[pro customCopy]];
         }
         [[RLMRealm defaultRealm] transactionWithBlock:^{
@@ -104,7 +114,6 @@
             [[RLMRealm defaultRealm] addOrUpdateObject:p];
         }];
     }
-
 }
 
 - (void)editController:(EditController *)ctr moveRowAtIndex:(NSInteger)sourceIndex toIndex:(NSInteger)destinationIndex
@@ -116,17 +125,13 @@
         sp.order = destinationIndex;
         dp.order = sourceIndex;
     }];
-
 }
 
 - (void)compare
 {
-
     CompareController *ctr = [[CompareController alloc] initWithClassify:self.projectClassify];
     [self.navigationController pushViewController:ctr animated:YES];
 }
 #pragma uitls
-- (void)refreshData
-{
-}
+
 @end

@@ -48,7 +48,7 @@
     [_contentTB registerClass:[ProjectDetailCell class] forCellReuseIdentifier:ReuseCellProjectDetailCell];
     [self createFooterView];
     
-    self.sortProperties = [self.project.rlmProperties sortedResultsUsingKeyPath:@"order" ascending:YES];
+    self.sortProperties = self.project.sortProperties;
 }
 
 - (void)createFooterView
@@ -128,6 +128,10 @@
         RLMResults *sourcePros  = [Property objectsWithPredicate:sourcePred];
         NSPredicate *destPred = [NSPredicate predicateWithFormat:@"classify.name == %@ and name = %@ ",self.project.classify.name,dp.name];
         RLMResults *destPros = [Property objectsWithPredicate:destPred];
+        
+        Property *clsSPro = [[self.project.classify.rlmProperties objectsWithPredicate:[NSPredicate predicateWithFormat:@"name = %@",sp.name]] firstObject];
+        Property *clsDPro = [[self.project.classify.rlmProperties objectsWithPredicate:[NSPredicate predicateWithFormat:@"name = %@",dp.name]] firstObject];
+        
         [[RLMRealm defaultRealm] transactionWithBlock:^{
             for (Property *pro in sourcePros) {
                 pro.order = dOrder;
@@ -135,6 +139,8 @@
             for (Property *pro in destPros) {
                 pro.order = sOrder;
             }
+            clsSPro.order = dOrder;
+            clsDPro.order = sOrder;
         }];
     }
 }
@@ -200,7 +206,8 @@
 {
     _fakeProperty = [[Property alloc] init];
     _fakeProperty.classify = self.project.classify;
-    _fakeProperty.order = self.project.classify.rlmProperties.count;
+    Property *maxOderProperty = [self.project.classify.sortPoperties lastObject];
+    _fakeProperty.order = maxOderProperty.order + 1;   //当创建property的数量太多越界，程序失败。但是，这种情况现实这不会出现。
     [_contentTB beginUpdates];
     [_contentTB insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.project.rlmProperties.count inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
     [_contentTB endUpdates];
