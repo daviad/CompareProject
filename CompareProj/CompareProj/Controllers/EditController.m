@@ -146,10 +146,6 @@
         
     }
 }
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
 
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -176,6 +172,14 @@
 }
 
 #pragma mark-- evnet
+- (void)toggleEditStatus
+{
+    _isEditting = !_isEditting;
+    [self changeEditStatus];
+    [_tableView reloadData];
+    _editingText = @"";
+
+}
 - (void)addItem
 {
     if ([self nameIsExist:[_editingText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]) {
@@ -183,7 +187,10 @@
     } else {
         [_dataArr addObject:@""];
         _isEditting = YES;
-        [self editTableView];
+        [self changeEditStatus];
+        [_tableView beginUpdates];
+        [_tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_dataArr.count -1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+        [_tableView endUpdates];
     }
 }
 
@@ -192,44 +199,15 @@
     [self.delegate compare];
 }
 
-- (void)toggleEditStatus
-{
-    _isEditting = !_isEditting;
-    [self editTableView];
-     _editingText = @"";
-}
-- (void)editTableView
-{
-    if (_isEditting)
-    {
-        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
-    }
-    else
-    {
-        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
-    }
-    [_tableView setEditing:_isEditting animated:YES];
-//    [_tableView reloadData];
-}
-
-- (BOOL)nameIsExist:(NSString*)name
-{
-    BOOL isexist = NO;
-    for (NSString *oldStr in _dataArr) {
-        if ([oldStr isEqualToString:name])
-        {
-            isexist = YES;
-        }
-    }
-    return isexist;
-}
 #pragma mark-  EditableCellDelegate <NSObject>
 - (void)textEditDone:(EditableCell*)cell text:(NSString*)text
 {
     if (text.length > 0) {
         if ([self nameIsExist:_editingText]) {
             [_dataArr removeLastObject];
-            [self editTableView];
+            [_tableView beginUpdates];
+            [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_dataArr.count inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+            [_tableView endUpdates];
         }
         if ([self nameIsExist:text])
         {
@@ -250,7 +228,9 @@
     else
     {
         [_dataArr removeLastObject];
-        [self editTableView];
+        [_tableView beginUpdates];
+        [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_dataArr.count inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+        [_tableView endUpdates];
     }
    
 }
@@ -259,4 +239,35 @@
 {
     _editingText = text;
 }
+#pragma mak- utils
+- (void)changeEditStatus
+{
+    [self changeNavigatinonRightItem];
+    [_tableView setEditing:_isEditting animated:YES];
+    
+}
+- (void)changeNavigatinonRightItem
+{
+    if (_isEditting)
+    {
+        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
+    }
+    else
+    {
+        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
+    }
+}
+
+- (BOOL)nameIsExist:(NSString*)name
+{
+    BOOL isexist = NO;
+    for (NSString *oldStr in _dataArr) {
+        if ([oldStr isEqualToString:name])
+        {
+            isexist = YES;
+        }
+    }
+    return isexist;
+}
+
 @end

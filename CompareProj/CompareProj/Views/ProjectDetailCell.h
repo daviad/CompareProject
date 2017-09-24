@@ -12,7 +12,7 @@
 
 - (void)keyEditDone:(ProjectDetailCell*)cell text:(NSString*)text;
 - (void)valueEditDone:(ProjectDetailCell*)cell text:(NSString*)text;
-
+- (void)keyDidChange:(ProjectDetailCell*)cell text:(NSString*)text;
 @end
 
 @interface ProjectDetailCell : UITableViewCell

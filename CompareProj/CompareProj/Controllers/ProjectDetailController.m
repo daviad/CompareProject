@@ -14,6 +14,7 @@
 @interface ProjectDetailController ()<UITableViewDelegate,UITableViewDataSource,ProjectDetailCellDelegate>
 {
     BOOL _isEditting;
+    NSString *_edittingKey;
 }
 @property(nonatomic,strong)UITableView *contentTB;
 @property(nonatomic,strong)Project *project;
@@ -41,6 +42,7 @@
     
     self.title = self.project.name;
     _isEditting = NO;
+    _edittingKey = @"";
     _contentTB = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _contentTB.delegate = self;
     _contentTB.dataSource = self;
@@ -106,7 +108,7 @@
     ProjectDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseCellProjectDetailCell];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     Property *p = _fakeProperty;
-    if (indexPath.row < self.project.rlmProperties.count) {
+    if (indexPath.row < self.project.sortProperties.count) {
       p = [self.sortProperties objectAtIndex:indexPath.row];
     }
     [cell setKey:p.name value:p.value];
@@ -159,6 +161,7 @@
             }
         }
     }
+    _edittingKey = @"";
 }
 
 - (void)valueEditDone:(ProjectDetailCell*)cell text:(NSString*)text
@@ -166,10 +169,13 @@
     if (text.length > 0) {
         if (_fakeProperty) {
             _fakeProperty.value = text;
-            [[RLMRealm defaultRealm] transactionWithBlock:^{
-                [self.project.rlmProperties addObject:_fakeProperty];
-            }];
-            _fakeProperty = nil;
+            if ([_fakeProperty.name isEqualToString:@""]) {
+            } else {
+                [[RLMRealm defaultRealm] transactionWithBlock:^{
+                    [self.project.rlmProperties addObject:_fakeProperty];
+                }];
+                _fakeProperty = nil;
+            }
         } else {
             NSIndexPath *index = [_contentTB indexPathForCell:cell];
             Property *p = self.project.rlmProperties[index.row];
@@ -179,17 +185,51 @@
         }
     }
 }
-
+- (void)keyDidChange:(ProjectDetailCell *)cell text:(NSString *)text
+{
+    _edittingKey = text;
+}
 #pragma mark- event
 - (void)toggleEditStatus
 {
+//    Property *lastProperty = [self.project.rlmProperties lastObject];
+//    if ([lastProperty.name isEqualToString:@""]) {
+//        <#statements#>
+//    }
     _isEditting = !_isEditting;
-    [self editTableView];
+    _edittingKey = @"";
+    [self changeEditStatus];
+    [_contentTB reloadData];
 }
 
-- (void)editTableView
+- (void)addItem
 {
+    if ([self keyIsExist:[_edittingKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]) {
     
+    } else {
+    _isEditting = YES;
+    _fakeProperty = [[Property alloc] init];
+    _fakeProperty.classify = self.project.classify;
+    Property *maxOderProperty = [self.project.classify.sortPoperties lastObject];
+    _fakeProperty.order = maxOderProperty.order + 1;   //当创建property的数量太多越界，程序失败。但是，这种情况现实这不会出现。
+    [_contentTB beginUpdates];
+        NSInteger row = self.project.rlmProperties.count;
+
+    [_contentTB insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.project.rlmProperties.count inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+    [_contentTB endUpdates];
+    [self changeEditStatus];
+   }
+}
+
+#pragma mark- utils
+- (void)changeEditStatus
+{
+    [self changeNavigatinonRightItem];
+    [_contentTB setEditing:_isEditting animated:YES];
+    
+}
+- (void)changeNavigatinonRightItem
+{
     if (_isEditting)
     {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
@@ -198,22 +238,14 @@
     {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     }
-    [_contentTB setEditing:_isEditting animated:YES];
-    [_contentTB reloadData];
 }
 
-- (void)addItem
+- (BOOL)keyIsExist:(NSString*)name
 {
-    _fakeProperty = [[Property alloc] init];
-    _fakeProperty.classify = self.project.classify;
-    Property *maxOderProperty = [self.project.classify.sortPoperties lastObject];
-    _fakeProperty.order = maxOderProperty.order + 1;   //当创建property的数量太多越界，程序失败。但是，这种情况现实这不会出现。
-    [_contentTB beginUpdates];
-    [_contentTB insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.project.rlmProperties.count inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
-    [_contentTB endUpdates];
+    NSArray *names = self.project.properties;
+    return [names containsObject:name] || [_fakeProperty.name isEqualToString:@""];
 }
 
-#pragma mark- utils
 - (void)addPropertyNameWithProperty:(NSString*)text
 {
     _fakeProperty.name = text;

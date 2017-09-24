@@ -83,6 +83,9 @@
 {
     _keyTextView.text = k;
     _valueTextView.text = v;
+    if ([k isEqualToString:@""]) {
+        [_keyTextView becomeFirstResponder];
+    }
 }
 #pragma mark-- UITextViewDelegate
 - (void)textViewDidEndEditing:(UITextView *)textView
@@ -96,4 +99,10 @@
     }
 }
 
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (_keyTextView == textView) {
+        [self.delegate keyDidChange:self text:textView.text];
+    }
+}
 @end
