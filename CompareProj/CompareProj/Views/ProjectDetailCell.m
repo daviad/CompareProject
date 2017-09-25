@@ -88,6 +88,12 @@
     }
 }
 #pragma mark-- UITextViewDelegate
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if (_keyTextView == textView) {
+        [self.delegate keyBeginEdit:self text:@""];
+    }
+}
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if (_valueTextView == textView) {

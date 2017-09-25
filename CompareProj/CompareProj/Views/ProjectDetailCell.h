@@ -10,7 +10,9 @@
 @class ProjectDetailCell;
 @protocol ProjectDetailCellDelegate <NSObject>
 
+- (void)keyBeginEdit:(ProjectDetailCell*)cell text:(NSString*)text;
 - (void)keyEditDone:(ProjectDetailCell*)cell text:(NSString*)text;
+
 - (void)valueEditDone:(ProjectDetailCell*)cell text:(NSString*)text;
 - (void)keyDidChange:(ProjectDetailCell*)cell text:(NSString*)text;
 @end

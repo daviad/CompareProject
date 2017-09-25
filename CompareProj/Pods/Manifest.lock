@@ -3,18 +3,20 @@ PODS:
   - Realm (2.8.3):
     - Realm/Headers (= 2.8.3)
   - Realm/Headers (2.8.3)
-  - SSCheckBoxView (0.0.1)
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
 
 DEPENDENCIES:
   - IQKeyboardManager
   - Realm
-  - SSCheckBoxView
+  - YYKit
 
 SPEC CHECKSUMS:
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   Realm: 3601ef091c8c499a31101d8563b991e75546cdce
-  SSCheckBoxView: bd0d5f17f87114b9f09de4041e8cdcb1c097f69a
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: aee507718c6409714ed6766a81f9822c132fdd09
+PODFILE CHECKSUM: 48476a23724c68d1f1fe66cc3abae4b185902acc
 
 COCOAPODS: 1.2.0
