@@ -7,7 +7,6 @@
 //
 
 #import "EditableCell.h"
-#import <SSCheckBoxView/SSCheckBoxView.h>
 
 @interface EditableCell ()<UITextViewDelegate>
 {

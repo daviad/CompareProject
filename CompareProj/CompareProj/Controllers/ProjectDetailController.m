@@ -160,13 +160,17 @@
     _isKeyEditting = NO;
     
     if (text.length > 0) {
-        if (_fakeProperty) {
-            [self addPropertyNameWithProperty:text];
-        } else {
-            NSIndexPath *index = [_contentTB indexPathForCell:cell];
+        NSIndexPath *index = [_contentTB indexPathForCell:cell];
+        if (index.row < self.project.rlmProperties.count) {
             Property *p = self.project.rlmProperties[index.row];
             if (![text isEqualToString:p.name]) {
                 [self freshPropertyNameWith:p.name newName:text];
+            }
+        } else {
+            if (_fakeProperty) {
+                [self addPropertyNameWithProperty:text];
+            } else {
+                
             }
         }
         _contentTB.tableFooterView.hidden = NO;
@@ -178,21 +182,24 @@
 - (void)valueEditDone:(ProjectDetailCell*)cell text:(NSString*)text
 {
     if (text.length > 0) {
-        if (_fakeProperty) {
-            _fakeProperty.value = text;
-            if ([_fakeProperty.name isEqualToString:@""]) {
-            } else {
-                [[RLMRealm defaultRealm] transactionWithBlock:^{
-                    [self.project.rlmProperties addObject:_fakeProperty];
-                }];
-                _fakeProperty = nil;
-            }
-        } else {
-            NSIndexPath *index = [_contentTB indexPathForCell:cell];
+        NSIndexPath *index = [_contentTB indexPathForCell:cell];
+        if (index.row < self.project.rlmProperties.count) {
             Property *p = self.project.rlmProperties[index.row];
             [[RLMRealm defaultRealm] transactionWithBlock:^{
                 p.value = text;
             }];
+        }
+        else {
+            if (_fakeProperty) {
+                _fakeProperty.value = text;
+                if ([_fakeProperty.name isEqualToString:@""]) {
+                } else {
+                    [[RLMRealm defaultRealm] transactionWithBlock:^{
+                        [self.project.rlmProperties addObject:_fakeProperty];
+                    }];
+                    _fakeProperty = nil;
+                }
+            }
         }
     }
 }
@@ -220,7 +227,6 @@
         _isEditting = YES;
         [self changeEditStatus];
     }
-    
     if ([self keyIsExist:[_edittingKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]) {
 
     } else {
@@ -232,6 +238,7 @@
         _fakeProperty.classify = self.project.classify;
         Property *maxOderProperty = [self.project.classify.sortPoperties lastObject];
         _fakeProperty.order = maxOderProperty.order + 1;   //当创建property的数量太多越界，程序失败。但是，这种情况现实这不会出现。
+        
 //        [_contentTB beginUpdates];
 //        [_contentTB insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.project.rlmProperties.count inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
 //        [_contentTB endUpdates];
@@ -272,23 +279,24 @@
         [[RLMRealm defaultRealm] transactionWithBlock:^{
             [self.project.rlmProperties addObject:_fakeProperty];
         }];
+        
+        Property *pro = [[self.project.classify.rlmProperties objectsWithPredicate:[NSPredicate predicateWithFormat:@"name == %@ ",text]] firstObject];
+        if (pro) {
+            [[RLMRealm defaultRealm] transactionWithBlock:^{
+                pro.count ++;
+            }];
+            [self addOtherDBPropertyIsNewProperty:NO withClassifyProperty:nil];
+        } else {
+            Property *newProperty = [_fakeProperty customCopy];
+            [[RLMRealm defaultRealm] transactionWithBlock:^{
+                [self.project.classify.rlmProperties addObject:newProperty];
+            }];
+            [self addOtherDBPropertyIsNewProperty:YES withClassifyProperty:newProperty];
+        }
+        
+        _fakeProperty = nil;
     }
-    
-    Property *pro = [[self.project.classify.rlmProperties objectsWithPredicate:[NSPredicate predicateWithFormat:@"name == %@ ",text]] firstObject];
-    if (pro) {
-        [[RLMRealm defaultRealm] transactionWithBlock:^{
-            pro.count ++;
-        }];
-        [self addOtherDBPropertyIsNewProperty:NO withClassifyProperty:nil];
-    } else {
-        Property *newProperty = [_fakeProperty customCopy];
-        [[RLMRealm defaultRealm] transactionWithBlock:^{
-            [self.project.classify.rlmProperties addObject:newProperty];
-        }];
-        [self addOtherDBPropertyIsNewProperty:YES withClassifyProperty:newProperty];
-    }
-    
-    _fakeProperty = nil;
+
 }
 - (void)addOtherDBPropertyIsNewProperty:(BOOL)flag withClassifyProperty:(Property*)cpro
 {

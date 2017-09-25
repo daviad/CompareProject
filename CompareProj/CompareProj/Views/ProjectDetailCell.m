@@ -7,10 +7,11 @@
 //
 
 #import "ProjectDetailCell.h"
+#import <YYKit/YYKit.h>
 
-@interface ProjectDetailCell ()<UITextViewDelegate>
-@property(nonatomic,strong)UITextView *keyTextView;
-@property(nonatomic,strong)UITextView *valueTextView;
+@interface ProjectDetailCell ()<YYTextViewDelegate>
+@property(nonatomic,strong)YYTextView *keyTextView;
+@property(nonatomic,strong)YYTextView *valueTextView;
 @property(nonatomic,strong)UIView *line;
 @end
 
@@ -19,13 +20,18 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        _keyTextView = [[UITextView alloc] init];
+        _keyTextView = [[YYTextView alloc] init];
         [self.contentView addSubview:_keyTextView];
         _keyTextView.delegate = self;
+        _keyTextView.placeholderText = @"please fill name";
+        _keyTextView.textAlignment = NSTextAlignmentCenter;
+        _keyTextView.textVerticalAlignment = YYTextVerticalAlignmentCenter;
         
-        _valueTextView = [[UITextView alloc] init];
+        _valueTextView = [[YYTextView alloc] init];
         [self.contentView addSubview:_valueTextView];
         _valueTextView.delegate = self;
+        _valueTextView.textAlignment =NSTextAlignmentCenter;
+        _valueTextView.textVerticalAlignment = YYTextVerticalAlignmentCenter;
         
         _line = [[UIView alloc] init];
         _line.backgroundColor = [UIColor grayColor];
@@ -50,6 +56,12 @@
     _keyTextView.frame = CGRectMake(0, 0, self.contentView.frame.size.width/2, self.contentView.frame.size.height);
     _valueTextView.frame = CGRectMake(self.contentView.frame.size.width/2, 0, self.contentView.frame.size.width/2, self.contentView.frame.size.height);
     _line.frame = CGRectMake(self.contentView.frame.size.width/2, 0, 1, self.contentView.frame.size.height);
+    
+    for (UIView *subview in self.contentView.superview.subviews) {
+        if ([NSStringFromClass(subview.class) hasSuffix:@"SeparatorView"]) {
+            subview.hidden = NO;
+        }
+    }
 }
 
 - (void)setEditable:(BOOL)editable
@@ -88,13 +100,13 @@
     }
 }
 #pragma mark-- UITextViewDelegate
-- (void)textViewDidBeginEditing:(UITextView *)textView
+- (void)textViewDidBeginEditing:(YYTextView *)textView
 {
     if (_keyTextView == textView) {
         [self.delegate keyBeginEdit:self text:@""];
     }
 }
-- (void)textViewDidEndEditing:(UITextView *)textView
+- (void)textViewDidEndEditing:(YYTextView *)textView
 {
     if (_valueTextView == textView) {
         [self.delegate valueEditDone:self text:textView.text];
@@ -105,7 +117,7 @@
     }
 }
 
-- (void)textViewDidChange:(UITextView *)textView
+- (void)textViewDidChange:(YYTextView *)textView
 {
     if (_keyTextView == textView) {
         [self.delegate keyDidChange:self text:textView.text];
