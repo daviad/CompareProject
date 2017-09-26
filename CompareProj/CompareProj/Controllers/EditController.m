@@ -33,7 +33,7 @@
 #define  ReuseCell   @"ReuseCell"
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
+    [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     _isEditting = NO;
     _editingText = @"";
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -57,17 +57,16 @@
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 50)];
     
     UIButton *addBtn = [[UIButton alloc] init];
-    [addBtn setTitle:@"add" forState:UIControlStateNormal];
+    [addBtn setTitle:@"添加" forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
-    //    [addBtn setTintColor:[UIColor redColor]];
-    [addBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     addBtn.backgroundColor = [UIColor blueColor];
    
     UIButton *compareBtn = [[UIButton alloc] init];
-    [compareBtn setTitle:@"compare" forState:UIControlStateNormal];
+    [compareBtn setTitle:@"对比" forState:UIControlStateNormal];
     [compareBtn addTarget:self action:@selector(compare) forControlEvents:UIControlEventTouchUpInside];
     compareBtn.backgroundColor = [UIColor blueColor];
-    [compareBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [compareBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     if (self.needCompare && _dataArr.count > 1) {
         addBtn.frame = CGRectMake((_tableView.frame.size.width/4 - 80/2), 3, 80, 44);
@@ -250,11 +249,11 @@
 {
     if (_isEditting)
     {
-        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
+        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     }
     else
     {
-        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
+        [GlobalUIControl sharedInstance].navigationController.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     }
 }
 

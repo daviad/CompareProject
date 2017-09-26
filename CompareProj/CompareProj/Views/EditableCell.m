@@ -7,11 +7,10 @@
 //
 
 #import "EditableCell.h"
-
+#import "IQTextView.h"
 @interface EditableCell ()<UITextViewDelegate>
 {
-    UITextView *_textView;
-//    SSCheckBoxView *_checkBox;
+    IQTextView *_textView;
 }
 @end
 
@@ -19,15 +18,13 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        _textView = [[UITextView alloc] init];
+        _textView = [[IQTextView alloc] init];
         _textView.textColor = [UIColor blackColor];
         _textView.font = [UIFont systemFontOfSize:16];
         [self.contentView addSubview:_textView];
         _textView.userInteractionEnabled = NO;
         _textView.delegate = self;
-//        _checkBox = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(0, 0, 30, 30) style:kSSCheckBoxViewStyleMono checked:NO];
-//        [_checkBox setStateChangedTarget:self selector:@selector(checkStatusChange)];
-//        [self.contentView addSubview:_checkBox];
+        _textView.placeholder = @"填写类别";
     }
     return self;
 }
@@ -45,11 +42,15 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if (_editable) {
-        
-    }
+    _textView.frame = CGRectMake(10, 8, self.contentView.frame.size.width -10 , self.contentView.frame.size.height );
+
+//    if (_editable) {
+//        _textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//        _textView.layer.borderWidth = 1;
+//    } else {
+//        _textView.layer.borderColor = [UIColor clearColor].CGColor;
+//    }
     
-    _textView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     for (UIView *subview in self.contentView.superview.subviews) {
         if ([NSStringFromClass(subview.class) hasSuffix:@"SeparatorView"]) {
             subview.hidden = NO;
@@ -69,6 +70,7 @@
 
 - (void)setEditable:(BOOL)editable
 {
+    _editable = editable;
     _textView.userInteractionEnabled = editable;
 }
 

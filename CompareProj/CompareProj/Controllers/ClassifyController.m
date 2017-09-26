@@ -23,7 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"classify list";
+    self.title = @"类别";
     self.view.backgroundColor = [UIColor whiteColor];
     
     _classifies = [[ProjectClassify allObjects] sortedResultsUsingKeyPath:@"order" ascending:YES];

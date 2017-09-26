@@ -7,11 +7,11 @@
 //
 
 #import "ProjectDetailCell.h"
-#import <YYKit/YYKit.h>
+#import "IQTextView.h"
 
-@interface ProjectDetailCell ()<YYTextViewDelegate>
-@property(nonatomic,strong)YYTextView *keyTextView;
-@property(nonatomic,strong)YYTextView *valueTextView;
+@interface ProjectDetailCell ()<UITextViewDelegate>
+@property(nonatomic,strong)IQTextView *keyTextView;
+@property(nonatomic,strong)IQTextView *valueTextView;
 @property(nonatomic,strong)UIView *line;
 @end
 
@@ -20,19 +20,19 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        _keyTextView = [[YYTextView alloc] init];
+        _keyTextView = [[IQTextView alloc] init];
         [self.contentView addSubview:_keyTextView];
         _keyTextView.delegate = self;
-        _keyTextView.placeholderText = @"please fill name";
+        _keyTextView.placeholder = @"please fill name";
         _keyTextView.textAlignment = NSTextAlignmentCenter;
-        _keyTextView.textVerticalAlignment = YYTextVerticalAlignmentCenter;
+        _keyTextView.font = [UIFont systemFontOfSize:14];
         
-        _valueTextView = [[YYTextView alloc] init];
+        _valueTextView = [[IQTextView alloc] init];
         [self.contentView addSubview:_valueTextView];
         _valueTextView.delegate = self;
         _valueTextView.textAlignment =NSTextAlignmentCenter;
-        _valueTextView.textVerticalAlignment = YYTextVerticalAlignmentCenter;
-        
+        _valueTextView.font = [UIFont systemFontOfSize:14];
+
         _line = [[UIView alloc] init];
         _line.backgroundColor = [UIColor grayColor];
         [self.contentView addSubview:_line];
@@ -71,10 +71,10 @@
     
     if (editable) {
         _keyTextView.layer.borderWidth = 1;
-        _keyTextView.layer.borderColor = [UIColor darkGrayColor].CGColor;
+        _keyTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
         
         _valueTextView.layer.borderWidth = 1;
-        _valueTextView.layer.borderColor = [UIColor darkGrayColor].CGColor;
+        _valueTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
         
         _line.backgroundColor = [UIColor clearColor];
     }
@@ -86,7 +86,7 @@
         _valueTextView.layer.borderWidth = 0;
 //        _valueTextView.layer.borderColor = [UIColor darkGrayColor].CGColor;
         
-        _line.backgroundColor = [UIColor grayColor];
+        _line.backgroundColor = [UIColor lightGrayColor];
     }
     
 }
@@ -100,13 +100,13 @@
     }
 }
 #pragma mark-- UITextViewDelegate
-- (void)textViewDidBeginEditing:(YYTextView *)textView
+- (void)textViewDidBeginEditing:(IQTextView *)textView
 {
     if (_keyTextView == textView) {
         [self.delegate keyBeginEdit:self text:@""];
     }
 }
-- (void)textViewDidEndEditing:(YYTextView *)textView
+- (void)textViewDidEndEditing:(IQTextView *)textView
 {
     if (_valueTextView == textView) {
         [self.delegate valueEditDone:self text:textView.text];
@@ -117,7 +117,7 @@
     }
 }
 
-- (void)textViewDidChange:(YYTextView *)textView
+- (void)textViewDidChange:(IQTextView *)textView
 {
     if (_keyTextView == textView) {
         [self.delegate keyDidChange:self text:textView.text];

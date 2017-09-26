@@ -39,7 +39,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     
     self.title = self.project.name;
     _isEditting = NO;
@@ -58,9 +58,9 @@
 {
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _contentTB.frame.size.width, 50)];
     UIButton *addBtn = [[UIButton alloc] init];
-    [addBtn setTitle:@"add" forState:UIControlStateNormal];
+    [addBtn setTitle:@"添加" forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     addBtn.backgroundColor = [UIColor blueColor];
     addBtn.frame = CGRectMake((_contentTB.frame.size.width/2 - 80/2), 3, 80, 44);
     [footView addSubview:addBtn];
@@ -74,17 +74,17 @@
 #pragma mark- UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 50;
 }
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     __weak ProjectDetailController *weakSelf = self;
     NSMutableArray *resultArr = [NSMutableArray array];
 
-        UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"eidt" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-            tableView.editing = NO;
-        }];
-        [resultArr addObject:action0];
+//        UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"eidt" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//            tableView.editing = NO;
+//        }];
+//        [resultArr addObject:action0];
  
     
     UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
@@ -257,11 +257,11 @@
 {
     if (_isEditting)
     {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     }
     else
     {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(toggleEditStatus)];
     }
 }
 

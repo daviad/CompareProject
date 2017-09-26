@@ -10,6 +10,7 @@
 #import "ViewController.h"
 #import "ClassifyController.h"
 #import "GlobalUIControl.h"
+#import "IQKeyboardManager.h"
 
 @interface AppDelegate ()
 
@@ -27,6 +28,10 @@
 
     self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
+    
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 50;
+
+    
     return YES;
 }
 
