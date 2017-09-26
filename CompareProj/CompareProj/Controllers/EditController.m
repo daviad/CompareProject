@@ -150,14 +150,14 @@
 {
     __weak EditController *weakSelf = self;
     NSMutableArray *resultArr = [NSMutableArray array];
-    if ([self.delegate needEidtDetail]) {
-        UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"eidt" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-            NSLog(@"");
-            [weakSelf.delegate clickEditDetailAtIndexPath:indexPath];
-            tableView.editing = NO;
-        }];
-        [resultArr addObject:action0];
-    }
+//    if ([self.delegate needEidtDetail]) {
+//        UITableViewRowAction *action0 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"eidt" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//            NSLog(@"");
+//            [weakSelf.delegate clickEditDetailAtIndexPath:indexPath];
+//            tableView.editing = NO;
+//        }];
+//        [resultArr addObject:action0];
+//    }
 
     UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         [weakSelf.delegate deleteRowsAtIndexPath:indexPath];

@@ -42,7 +42,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    _textView.frame = CGRectMake(10, 8, self.contentView.frame.size.width -10 , self.contentView.frame.size.height );
+    _textView.frame = CGRectMake(10, 8, self.contentView.frame.size.width -10 , self.contentView.frame.size.height -16 );
 
 //    if (_editable) {
 //        _textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
