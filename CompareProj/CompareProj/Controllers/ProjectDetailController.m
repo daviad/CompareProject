@@ -61,7 +61,7 @@
     [addBtn setTitle:@"添加" forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
     [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    addBtn.backgroundColor = [UIColor lightGrayColor];
+    addBtn.backgroundColor = CurrentTheme.buttonTiltleColor;
     addBtn.layer.cornerRadius = 4;
     addBtn.clipsToBounds = YES;
     addBtn.frame = CGRectMake((_contentTB.frame.size.width/2 - 80/2), 3, 80, 44);

@@ -11,6 +11,7 @@
 #import "ClassifyController.h"
 #import "GlobalUIControl.h"
 #import "IQKeyboardManager.h"
+#import "ThemeManager.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +22,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [ThemeManager sharedInstance];
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[ClassifyController new]];

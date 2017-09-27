@@ -19,6 +19,8 @@
 		B94E366D1F749C060028C345 /* ProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94E36651F749C060028C345 /* ProjectController.m */; };
 		B94E366E1F749C060028C345 /* ProjectDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94E36671F749C060028C345 /* ProjectDetailController.m */; };
 		B94E366F1F749C060028C345 /* PropertyController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94E36691F749C060028C345 /* PropertyController.m */; };
+		B968A2061F7B6DC1004E5723 /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B968A2051F7B6DC1004E5723 /* ThemeManager.m */; };
+		B968A20A1F7B6E2E004E5723 /* DefaultTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = B968A2091F7B6E2E004E5723 /* DefaultTheme.m */; };
 		B96902AC1F68CF1100943379 /* GlobalUIControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B96902AB1F68CF1100943379 /* GlobalUIControl.m */; };
 		B96F6B4B1F67D1E500878522 /* RLMRealm+AGDynamic.m in Sources */ = {isa = PBXBuildFile; fileRef = B96F6B4A1F67D1E500878522 /* RLMRealm+AGDynamic.m */; };
 		B9769E5E1F66359C008EC8B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9769E5D1F66359C008EC8B3 /* main.m */; };
@@ -101,6 +103,11 @@
 		B94E36681F749C060028C345 /* PropertyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyController.h; sourceTree = "<group>"; };
 		B94E36691F749C060028C345 /* PropertyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyController.m; sourceTree = "<group>"; };
 		B95F4BF71F6B6CEE00F1C52D /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		B968A2041F7B6DC1004E5723 /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeManager.h; sourceTree = "<group>"; };
+		B968A2051F7B6DC1004E5723 /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeManager.m; sourceTree = "<group>"; };
+		B968A2071F7B6DEE004E5723 /* ThemeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeProtocol.h; sourceTree = "<group>"; };
+		B968A2081F7B6E2E004E5723 /* DefaultTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultTheme.h; sourceTree = "<group>"; };
+		B968A2091F7B6E2E004E5723 /* DefaultTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultTheme.m; sourceTree = "<group>"; };
 		B96902AA1F68CF1100943379 /* GlobalUIControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalUIControl.h; sourceTree = "<group>"; };
 		B96902AB1F68CF1100943379 /* GlobalUIControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalUIControl.m; sourceTree = "<group>"; };
 		B96CAB471F71FAF900F0DB61 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
@@ -215,6 +222,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B968A2031F7B6D85004E5723 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				B968A2041F7B6DC1004E5723 /* ThemeManager.h */,
+				B968A2051F7B6DC1004E5723 /* ThemeManager.m */,
+				B968A2071F7B6DEE004E5723 /* ThemeProtocol.h */,
+				B968A2081F7B6E2E004E5723 /* DefaultTheme.h */,
+				B968A2091F7B6E2E004E5723 /* DefaultTheme.m */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 		B9769E501F66359C008EC8B3 = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +257,7 @@
 		B9769E5B1F66359C008EC8B3 /* CompareProj */ = {
 			isa = PBXGroup;
 			children = (
+				B968A2031F7B6D85004E5723 /* Theme */,
 				B94E365D1F749C060028C345 /* Controllers */,
 				B94E36561F749C010028C345 /* Views */,
 				B94E364C1F749BFA0028C345 /* model */,
@@ -474,6 +494,7 @@
 			files = (
 				B9769E641F66359C008EC8B3 /* ViewController.m in Sources */,
 				B9769ED91F6665DF008EC8B3 /* LockViewCell.m in Sources */,
+				B968A2061F7B6DC1004E5723 /* ThemeManager.m in Sources */,
 				B9769ED41F6665DF008EC8B3 /* ExcelSection.m in Sources */,
 				B94E366E1F749C060028C345 /* ProjectDetailController.m in Sources */,
 				B94E36541F749BFA0028C345 /* ProjectClassify.m in Sources */,
@@ -496,6 +517,7 @@
 				B94E366A1F749C060028C345 /* ClassifyController.m in Sources */,
 				B9769ED01F6665DF008EC8B3 /* ExcelLockCell.m in Sources */,
 				B9769EDB1F6665DF008EC8B3 /* ScrollViewCell.m in Sources */,
+				B968A20A1F7B6E2E004E5723 /* DefaultTheme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +639,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6D7J43H33A;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = CompareProj/PrefixHeader.pch;
 				INFOPLIST_FILE = CompareProj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -631,6 +655,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6D7J43H33A;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = CompareProj/PrefixHeader.pch;
 				INFOPLIST_FILE = CompareProj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
