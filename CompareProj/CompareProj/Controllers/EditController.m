@@ -59,7 +59,7 @@
     UIButton *addBtn = [[UIButton alloc] init];
     [addBtn setTitle:@"添加" forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
-    addBtn.backgroundColor = CurrentTheme.buttonTiltleColor;
+    addBtn.backgroundColor = CurrentTheme.buttonBackgroudColor;
     addBtn.layer.cornerRadius = 4;
     addBtn.clipsToBounds = YES;
    
