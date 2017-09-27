@@ -60,12 +60,16 @@
     [addBtn setTitle:@"添加" forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
     [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    addBtn.backgroundColor = [UIColor blueColor];
+    addBtn.backgroundColor = [UIColor lightGrayColor];
+    addBtn.layer.cornerRadius = 4;
+    addBtn.clipsToBounds = YES;
    
     UIButton *compareBtn = [[UIButton alloc] init];
     [compareBtn setTitle:@"对比" forState:UIControlStateNormal];
     [compareBtn addTarget:self action:@selector(compare) forControlEvents:UIControlEventTouchUpInside];
-    compareBtn.backgroundColor = [UIColor blueColor];
+    compareBtn.backgroundColor = [UIColor lightGrayColor];
+    compareBtn.layer.cornerRadius = 4;
+    compareBtn.clipsToBounds = YES;
     [compareBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     if (self.needCompare && _dataArr.count > 1) {

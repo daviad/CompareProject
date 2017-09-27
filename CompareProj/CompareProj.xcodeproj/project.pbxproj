@@ -65,12 +65,12 @@
 			remoteGlobalIDString = 2E3DC5A0941414EFC0E147D39DBAAC2E;
 			remoteInfo = Realm;
 		};
-		B95F4C041F6B6CEE00F1C52D /* PBXContainerItemProxy */ = {
+		B968A1CB1F7B31AD004E5723 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B95F4BF71F6B6CEE00F1C52D /* Pods.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = C4C81617982F86BB88A6C210B21174D8;
-			remoteInfo = SSCheckBoxView;
+			remoteGlobalIDString = F4765EB43C42187301609290DEF91AB1;
+			remoteInfo = YYKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -210,7 +210,7 @@
 				B95F4BFF1F6B6CEE00F1C52D /* IQKeyboardManager.framework */,
 				B95F4C011F6B6CEE00F1C52D /* Pods_CompareProj.framework */,
 				B95F4C031F6B6CEE00F1C52D /* Realm.framework */,
-				B95F4C051F6B6CEE00F1C52D /* SSCheckBoxView.framework */,
+				B968A1CC1F7B31AD004E5723 /* YYKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -391,11 +391,11 @@
 			remoteRef = B95F4C021F6B6CEE00F1C52D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B95F4C051F6B6CEE00F1C52D /* SSCheckBoxView.framework */ = {
+		B968A1CC1F7B31AD004E5723 /* YYKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = SSCheckBoxView.framework;
-			remoteRef = B95F4C041F6B6CEE00F1C52D /* PBXContainerItemProxy */;
+			path = YYKit.framework;
+			remoteRef = B968A1CB1F7B31AD004E5723 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

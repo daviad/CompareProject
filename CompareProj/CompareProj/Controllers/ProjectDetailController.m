@@ -61,7 +61,9 @@
     [addBtn setTitle:@"添加" forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
     [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    addBtn.backgroundColor = [UIColor blueColor];
+    addBtn.backgroundColor = [UIColor lightGrayColor];
+    addBtn.layer.cornerRadius = 4;
+    addBtn.clipsToBounds = YES;
     addBtn.frame = CGRectMake((_contentTB.frame.size.width/2 - 80/2), 3, 80, 44);
     [footView addSubview:addBtn];
     _contentTB.tableFooterView = footView;
